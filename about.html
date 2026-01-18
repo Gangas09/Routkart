@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Rout Groceries</title>
+    <meta name="description"
+        content="Learn more about Rout Groceries — your trusted partner for fresh, fast, and affordable grocery delivery.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* All existing CSS styles from index.html */
+        /* Base Styles & Variables */
+        :root {
+            --Primary: #00FF99;
+            --primary-light: #3cb371;
+            --primary-dark: #1f6b3f;
+            --Secondary: #0D0D0D;
+            --Accent: #FFD700;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --transition: all 0.4s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --Highlight: #00FFFF;
+            --Background: #111111;
+            --light-red: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #FFFDE7;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 70px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: black;
+            margin-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header Styles - Fully Responsive */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgb(152, 251, 152);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        header.scrolled {
+            background: rgb(240, 255, 240);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .logo-container:hover .logo-image {
+            transform: scale(1.1);
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+        }
+
+        .hamburger div {
+            height: 3px;
+            width: 100%;
+            background-color: var(--dark);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        /* Promotion Line Styles */
+        .promo-line {
+            background: linear-gradient(135deg, #2e8b57, #ff7f50);
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 80px;
+        }
+
+        .promo-text {
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-highlight {
+            color: #ffd700;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* About Page Specific Styles */
+        .about-hero {
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .about-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.5s;
+        }
+
+        .about-hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.8s;
+        }
+
+        .about-hero-btn {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 1.1s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Our Story Section */
+        .our-story {
+            padding-top: 120px !important;
+            margin-top: 0 !important;
+        }
+
+        .story-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .story-text {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: var(--transition);
+        }
+
+        .story-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .story-image {
+            flex: 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateX(50px);
+            transition: var(--transition);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .our-story.animated .story-text,
+        .our-story.animated .story-image {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Mission & Vision Section */
+        .mission-vision {
+            padding: 70px 0;
+            background: rgb(126, 156, 100);
+            color: white;
+        }
+
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .mission-card,
+        .vision-card {
+            padding: 40px 30px;
+            background: rgb(35 149 116 / 68%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .mission-card:hover,
+        .vision-card:hover {
+            transform: translateY(-10px);
+            background: rgba(73, 13, 203, 0.15);
+        }
+
+        .mission-vision.animated .mission-card,
+        .mission-vision.animated .vision-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mission-vision-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #ffd700, #ffffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a2a6c;
+            font-size: 2rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .mission-card:hover .mission-vision-icon,
+        .vision-card:hover .mission-vision-icon {
+            transform: rotateY(180deg) scale(1.1);
+            background: linear-gradient(135deg, #ffffff, #00b3ff);
+        }
+
+        .mission-card h3,
+        .vision-card h3 {
+            margin-bottom: 15px;
+            color: #23c729;
+            font-size: 1.5rem;
+        }
+
+        /* Our Values Section */
+        .values {
+            padding: 70px 0;
+            background-color: rgb(186, 245, 211);
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .values::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 153, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .values .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            perspective: 1000px;
+        }
+
+        .value-card {
+            padding: 30px 20px;
+            background: rgb(135, 219, 233);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(50px) rotateX(15deg);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid rgba(0, 255, 153, 0.1);
+            transform-style: preserve-3d;
+            transform-origin: center;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 153, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .value-card:hover {
+            transform: translateY(-15px) rotateX(0deg) scale(1.05) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 30px rgba(0, 255, 153, 0.2);
+            background: rgb(173, 227, 122);
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .values.animated .value-card {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.2) rotateY(180deg) translateZ(30px);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 153, 0.4);
+        }
+
+        .value-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 153, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            z-index: 0;
+        }
+
+        .value-card:hover .value-glow {
+            width: 200px;
+            height: 200px;
+        }
+
+        .value-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+            transform: translateZ(10px);
+        }
+
+        .value-card:hover h3 {
+            color: var(--primary-dark);
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+            transform: translateZ(15px);
+        }
+
+        .value-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+            transform: translateZ(5px);
+        }
+
+        .value-card:hover p {
+            color: var(--dark);
+            transform: translateZ(10px);
+        }
+
+        /* Particle Animation */
+        .value-particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .value-card:hover .particle:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .value-card:hover .particle:nth-child(2) {
+            top: 70%;
+            left: 80%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 0.5s;
+        }
+
+        .value-card:hover .particle:nth-child(3) {
+            top: 40%;
+            left: 10%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 1s;
+        }
+
+        .value-card:hover .particle:nth-child(4) {
+            top: 80%;
+            left: 30%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 1.5s;
+        }
+
+        .value-card:hover .particle:nth-child(5) {
+            top: 10%;
+            left: 70%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-10px) translateX(5px);
+            }
+
+            50% {
+                transform: translateY(-5px) translateX(10px);
+            }
+
+            75% {
+                transform: translateY(-15px) translateX(5px);
+            }
+        }
+
+        /* Staggered animation for cards */
+        .values-grid .value-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .values-grid .value-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .values-grid .value-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .values-grid .value-card:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .values-grid .value-card:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        /* 3D floating effect */
+        @keyframes float3d {
+
+            0%,
+            100% {
+                transform: translateY(0) rotateX(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotateX(5deg);
+            }
+        }
+
+        .value-card.animated {
+            animation: float3d 6s ease-in-out infinite;
+        }
+
+        .value-card.animated:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .value-card.animated:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .value-card.animated:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        .value-card.animated:nth-child(5) {
+            animation-delay: 2s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .value-card:hover {
+                transform: translateY(-10px) rotateX(0deg) scale(1.03) rotateY(0deg);
+            }
+
+            .value-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-us {
+            padding: 70px 0;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .advantage-card {
+            padding: 40px 25px;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease-in-out;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .advantage-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #00d4ff, #ff6b6b);
+            transform: scaleX(0);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .advantage-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .why-choose-us.animated .advantage-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .advantage-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.2rem;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .advantage-card:hover .advantage-icon {
+            transform: scale(1.1) rotate(15deg);
+            background: linear-gradient(135deg, #ff6b6b, #00d4ff);
+        }
+
+        .advantage-card h3 {
+            margin-bottom: 15px;
+            color: #00d4ff;
+            font-size: 1.5rem;
+        }
+
+        .advantage-card p {
+            color: #a0aec0;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 70px 0;
+            background-color: rgb(186, 245, 211);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .team.animated .team-member {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-info {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .member-info h3 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .member-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        /* Feedback Section Styles */
+        .feedback {
+            padding: 70px 0;
+            background: rgb(47 213 153);
+            color: rgb(22, 41, 20);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feedback::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 153, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .feedback .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feedback-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .feedback-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                opacity 4s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) rotateX(15deg);
+        }
+
+        .feedback-form.animated {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
+
+        .form-group:hover {
+            transform: translateZ(10px);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent);
+            font-weight: 600;
+            transition: color 0.4s ease;
+        }
+
+        .form-group:hover label {
+            color: var(--highlight);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 255, 153, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateZ(5px);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .rating-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            transform-style: preserve-3d;
+        }
+
+        .rating-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rating-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) translateZ(10px);
+        }
+
+        .rating-option.selected {
+            background: rgba(0, 255, 153, 0.3);
+            transform: translateY(-10px) translateZ(15px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .rating-option input {
+            display: none;
+        }
+
+        .rating-label {
+            display: block;
+            font-weight: 600;
+            color: white;
+            transition: color 0.4s ease;
+        }
+
+        .rating-option:hover .rating-label {
+            color: var(--accent);
+        }
+
+        .rating-option.selected .rating-label {
+            color: var(--highlight);
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: rgb(20, 182, 101);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .submit-btn:hover::before {
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px) translateZ(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0) translateZ(5px);
+        }
+
+        .feedback-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .feedback-form:hover .particle:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .feedback-form:hover .particle:nth-child(2) {
+            top: 70%;
+            left: 80%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 0.5s;
+        }
+
+        .feedback-form:hover .particle:nth-child(3) {
+            top: 40%;
+            left: 10%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 1s;
+        }
+
+        .feedback-form:hover .particle:nth-child(4) {
+            top: 80%;
+            left: 30%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 1.5s;
+        }
+
+        .feedback-form:hover .particle:nth-child(5) {
+            top: 10%;
+            left: 70%;
+            opacity: 1;
+            transform: translate(0, 0);
+            animation: float 3s ease-in-out infinite 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-10px) translateX(5px);
+            }
+
+            50% {
+                transform: translateY(-5px) translateX(10px);
+            }
+
+            75% {
+                transform: translateY(-15px) translateX(5px);
+            }
+        }
+
+        .form-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 153, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .feedback-form:hover .form-glow {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            z-index: 1000;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .success-message.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .rating-container {
+                flex-direction: column;
+            }
+
+            .rating-option {
+                margin: 5px 0;
+            }
+
+            .feedback-form {
+                padding: 25px;
+            }
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 70px 0;
+            background-color: rgb(186, 245, 211);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        /* Footer */
+        footer {
+            background: #3A5A40;
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            background: #3A5A40;
+            padding: 25px 0;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite linear;
+        }
+
+        .footer-bottom p {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .website-link {
+            color: #f39c12;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .website-link:hover {
+            color: #e74c3c;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
+        }
+
+        .website-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .website-link:hover::after {
+            width: 100%;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+            }
+
+            100% {
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+
+        /* Pulse animation for the entire footer */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 #3A5A40;
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
+        }
+
+        .footer-bottom {
+            animation: pulse 2s infinite;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .story-content {
+                flex-direction: column;
+            }
+
+            .story-text,
+            .story-image {
+                flex: none;
+                width: 100%;
+            }
+
+            .story-text {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 15px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: rgb(103, 224, 101);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .about-hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .mission-vision-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .about-hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+
+            .promo-line {
+                font-size: 1rem;
+                padding: 10px 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero {
+                height: 50vh;
+                min-height: 350px;
+            }
+
+            .about-hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .values-grid,
+            .advantages-grid,
+            .team-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="logo-img">
+                    <img src="images/logo.jpg" alt="Rout Groceries Logo" class="logo-image">
+                </div>
+                <div class="logo-text">
+                    <h1>Rout Groceries</h1>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <!-- Our Story Section -->
+    <section class="our-story">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Journey</h2>
+            </div>
+            <div class="story-content">
+                <div class="story-text animate-on-scroll">
+                    <h2>How Rout Groceries Started</h2>
+                    <p>Rout Groceries started with a simple mission — to make grocery shopping easier, fresher, and
+                        faster. We connect customers with local farmers and trusted suppliers to ensure quality and
+                        affordability.</p>
+                    <p>Founded in 2007, we've grown from a small local business to a trusted grocery delivery service
+                        serving thousands of satisfied customers. Our team carefully selects each product to ensure it
+                        meets our high standards for quality and freshness.</p>
+                    <p>We work directly with local farmers and trusted suppliers to bring you the best products at
+                        competitive prices. Our commitment to sustainability means we prioritize eco-friendly packaging
+                        and support local communities.</p>
+                </div>
+                <div class="story-image animate-on-scroll">
+                    <img src="images/groceries.jpg" alt="Our Story">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Mission & Vision</h2>
+            </div>
+            <div class="mission-vision-grid">
+                <div class="mission-card animate-on-scroll">
+                    <div class="mission-vision-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To provide fresh, organic, and affordable groceries to every home with convenience and care.</p>
+                </div>
+                <div class="vision-card animate-on-scroll">
+                    <div class="mission-vision-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To become the most trusted grocery brand by blending technology and sustainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Values</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="value-glow"></div>
+                    <h3>Freshness Guaranteed</h3>
+                    <p>We ensure all our products are fresh and of the highest quality.</p>
+                    <div class="value-particle-container">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="value-glow"></div>
+                    <h3>Fast Delivery</h3>
+                    <p>Your groceries delivered to your doorstep in the shortest time possible.</p>
+                    <div class="value-particle-container">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="value-glow"></div>
+                    <h3>Customer Satisfaction</h3>
+                    <p>Your happiness is our top priority. We go the extra mile to serve you better.</p>
+                    <div class="value-particle-container">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="value-glow"></div>
+                    <h3>Sustainable Sourcing</h3>
+                    <p>We prioritize eco-friendly practices and support local communities.</p>
+                    <div class="value-particle-container">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Feedback Section -->
+    <section class="feedback" id="feedback">
+        <div class="container">
+            <div class="section-title">
+                <h2>Share Your Feedback</h2>
+            </div>
+            <div class="feedback-form-container">
+                <form class="feedback-form animate-on-scroll" id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>How would you rate our service?</label>
+                        <div class="rating-container">
+                            <div class="rating-option">
+                                <input type="radio" id="rating-1" name="rating" value="1">
+                                <label for="rating-1" class="rating-label">Poor</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-2" name="rating" value="2">
+                                <label for="rating-2" class="rating-label">Fair</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-3" name="rating" value="3">
+                                <label for="rating-3" class="rating-label">Good</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-4" name="rating" value="4">
+                                <label for="rating-4" class="rating-label">Very Good</label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating-5" name="rating" value="5">
+                                <label for="rating-5" class="rating-label">Excellent</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Feedback</label>
+                        <textarea id="message" class="form-control" placeholder="Tell us about your experience..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Feedback</button>
+                    <div class="form-glow"></div>
+                    <div class="feedback-particles">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <div class="success-icon">✓</div>
+        <h3>Thank You!</h3>
+        <p>Your feedback has been submitted successfully.</p>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Join thousands of happy customers who trust Rout Groceries</h2>
+                <p>Experience the convenience of fresh groceries delivered right to your doorstep. Shop now and enjoy
+                    our special introductory offers!</p>
+                <a href="product.html" class="btn">Start Shopping</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Rout Groceries</h3>
+                    <p>Your trusted partner for fresh, high-quality groceries delivered right to your doorstep.</p>
+
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="product.html">Products</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                       <li><i class="fas fa-map-marker-alt"></i>Badbil , Jamudiha , 756041</li>
+                        <li><i class="fas fa-phone"></i>+91 7735613751</li>
+                        <li><i class="fas fa-envelope"></i> info@routk5401@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="https://tegnifix.com" target="_blank" class="website-link">Tegnifix.com</a>. All
+                    rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Scroll Animation
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Initial check on page load
+        window.addEventListener('load', checkScroll);
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Enhanced animation for values section
+        document.addEventListener('DOMContentLoaded', function () {
+            const valueCards = document.querySelectorAll('.value-card');
+
+            valueCards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.zIndex = '10';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.zIndex = '1';
+                });
+            });
+
+            // Add parallax effect to values section background
+            window.addEventListener('scroll', function () {
+                const valuesSection = document.querySelector('.values');
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+
+                if (valuesSection) {
+                    valuesSection.style.backgroundPosition = `center ${rate}px`;
+                }
+            });
+
+            // Add 3D tilt effect on mouse move
+            const valuesGrid = document.querySelector('.values-grid');
+
+            valuesGrid.addEventListener('mousemove', function (e) {
+                const cards = document.querySelectorAll('.value-card');
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const cardX = rect.left + rect.width / 2;
+                    const cardY = rect.top + rect.height / 2;
+
+                    const angleX = (mouseY - cardY) / 20;
+                    const angleY = (cardX - mouseX) / 20;
+
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
+            });
+
+            valuesGrid.addEventListener('mouseleave', function () {
+                const cards = document.querySelectorAll('.value-card');
+
+                cards.forEach(card => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+        });
+
+        // Rating selection functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const ratingOptions = document.querySelectorAll('.rating-option');
+
+            ratingOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    // Remove selected class from all options
+                    ratingOptions.forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+
+                    // Check the radio input inside
+                    const radioInput = this.querySelector('input[type="radio"]');
+                    if (radioInput) {
+                        radioInput.checked = true;
+                    }
+                });
+            });
+
+            // Feedback form submission
+            const feedbackForm = document.getElementById('feedbackForm');
+            const successMessage = document.getElementById('successMessage');
+
+            feedbackForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Get form data
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const rating = document.querySelector('input[name="rating"]:checked');
+                const message = document.getElementById('message').value;
+
+                // Check if rating is selected
+                if (!rating) {
+                    alert('Please select a rating before submitting your feedback.');
+                    return;
+                }
+
+                // Create WhatsApp message
+                const whatsappMessage = `New Feedback from Rout Groceries Website:\n\nName: ${name}\nEmail: ${email}\nRating: ${rating.value} - ${rating.parentElement.querySelector('.rating-label').textContent}\nMessage: ${message}`;
+
+                // Encode message for URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+
+                // Create WhatsApp URL
+                const whatsappURL = `https://wa.me/917735613751?text=${encodedMessage}`;
+
+                // Open WhatsApp in a new tab
+                window.open(whatsappURL, '_blank');
+
+                // Show success message
+                successMessage.classList.add('active');
+
+                // Reset form
+                feedbackForm.reset();
+
+                // Remove selected class from rating options
+                ratingOptions.forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('active');
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+
+</html>

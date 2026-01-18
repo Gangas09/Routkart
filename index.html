@@ -1,0 +1,2950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rout Groceries - Fresh Food Delivered</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* All existing CSS styles remain exactly the same */
+        /* Base Styles & Variables */
+        :root {
+            --Primary: #00FF99;
+            --primary-light: #3cb371;
+            --primary-dark: #1f6b3f;
+            --Secondary: #0D0D0D;
+            --Accent: #FFD700;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --transition: all 0.4s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --Highlight: #00FFFF;
+            --Background: #111111;
+            --light-red: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #FFFDE7;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 70px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: black;
+            margin-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header Styles - Fully Responsive */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgb(152, 251, 152);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        header.scrolled {
+            background: rgb(240, 255, 240);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .logo-container:hover .logo-image {
+            transform: scale(1.1);
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            /* Increased font size */
+            color: var(--dark);
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+        }
+
+        .hamburger div {
+            height: 3px;
+            width: 100%;
+            background-color: var(--dark);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        /* Promotion Line Styles */
+        .promo-line {
+            background: linear-gradient(135deg, #2e8b57, #ff7f50);
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 80px;
+        }
+
+        .promo-text {
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-highlight {
+            color: #ffd700;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Hero Section - Fully Responsive */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease, transform 8s ease;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 2;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.5s;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.8s;
+        }
+
+        .hero-btn {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 1.1s;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about {
+            background-color: rgb(186, 245, 211);
+            padding: 70px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: var(--transition);
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateX(50px);
+            transition: var(--transition);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about.animated .about-text,
+        .about.animated .about-image {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Our Brands Section */
+        .brands {
+            padding: 70px 0;
+            background: rgb(186, 245, 211);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .brands-slider {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+        }
+
+        .brands-track {
+            display: flex;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            animation: slideBrands 20s linear infinite;
+        }
+
+        .brand-item {
+            flex: 0 0 auto;
+            width: 150px;
+            height: 150px;
+            margin: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgb(186, 245, 211);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            overflow: hidden;
+        }
+
+        .brand-item:hover {
+            transform: rotateY(180deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .brand-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .brand-item:hover .brand-image img {
+            transform: scale(1.1);
+        }
+
+        @keyframes slideBrands {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+       /* Feedback Section */
+.feedback {
+    padding: 70px 0;
+    background: rgb(107, 169, 132);
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+.feedback .section-title h2 {
+    color: white;
+}
+
+.feedback-slider {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 320px;
+    overflow: hidden;
+}
+
+.feedback-track {
+    display: flex;
+    position: relative;
+    height: 100%;
+    animation: slideFeedback 40s linear infinite;
+    width: max-content;
+}
+
+.feedback-item {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 400px;
+    min-width: 300px;
+    margin: 0 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.feedback-item:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.customer-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.customer-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    background: linear-gradient(135deg, #ffd700, #ff6b6b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--dark);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.customer-details h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #ffd700;
+}
+
+.customer-details p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.feedback-text {
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+}
+
+.rating {
+    color: #ffd700;
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+.rating i {
+    margin-right: 3px;
+}
+
+@keyframes slideFeedback {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause animation on hover */
+.feedback-track:hover {
+    animation-play-state: paused;
+}
+
+/* Responsive Design for Feedback Section */
+@media (max-width: 1200px) {
+    .feedback-item {
+        max-width: 350px;
+        min-width: 280px;
+        margin: 0 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .feedback-item {
+        max-width: 320px;
+        min-width: 260px;
+        margin: 0 15px;
+        padding: 20px;
+    }
+    
+    .customer-avatar {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .feedback-text {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .feedback {
+        padding: 50px 0;
+    }
+    
+    .feedback-slider {
+        min-height: 280px;
+    }
+    
+    .feedback-item {
+        max-width: 280px;
+        min-width: 240px;
+        margin: 0 10px;
+        padding: 20px;
+    }
+    
+    .feedback-track {
+        animation: slideFeedback 30s linear infinite;
+    }
+    
+    .customer-info {
+        margin-bottom: 15px;
+    }
+    
+    .customer-avatar {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+    
+    .customer-details h4 {
+        font-size: 1.1rem;
+    }
+    
+    .customer-details p {
+        font-size: 0.85rem;
+    }
+    
+    .feedback-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .rating {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .feedback {
+        padding: 40px 0;
+    }
+    
+    .feedback .section-title h2 {
+        font-size: 1.8rem;
+    }
+    
+    .feedback-slider {
+        min-height: 250px;
+    }
+    
+    .feedback-item {
+        max-width: 250px;
+        min-width: 220px;
+        margin: 0 8px;
+        padding: 15px;
+    }
+    
+    .customer-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .customer-details h4 {
+        font-size: 1rem;
+    }
+    
+    .customer-details p {
+        font-size: 0.8rem;
+    }
+    
+    .feedback-text {
+        font-size: 0.85rem;
+    }
+    
+    .rating {
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .feedback-item {
+        max-width: 220px;
+        min-width: 200px;
+        margin: 0 5px;
+        padding: 12px;
+    }
+    
+    .feedback-track {
+        animation: slideFeedback 25s linear infinite;
+    }
+}
+
+        /* Products Section - Updated from index1.html */
+        .products {
+            text-align: center;
+            padding: 70px 0;
+        }
+
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .category {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .category:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .all-products {
+            margin-top: 50px;
+        }
+
+        /* Featured Products Slider - Cyclic */
+        .featured-products-slider {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+        }
+
+        .featured-products-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            flex: 1;
+            gap: 30px;
+        }
+
+        .featured-product-item {
+            min-width: 200px;
+            flex: 0 0 auto;
+            text-align: center;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .featured-product-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .featured-product-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .featured-product-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .featured-product-img:hover {
+            transform: scale(1.1);
+        }
+
+        .featured-product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Slider Controls */
+        .slider-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .slider-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1.2rem;
+            pointer-events: all;
+            z-index: 10;
+            box-shadow: var(--shadow);
+        }
+
+        .slider-nav-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Additional Products Section */
+        .additional-products {
+            margin-top: 40px;
+        }
+
+        .additional-products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .additional-product-item {
+            text-align: center;
+            transition: var(--transition);
+            width: 150px;
+        }
+
+        .additional-product-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .additional-product-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .additional-product-img:hover {
+            transform: scale(1.1);
+        }
+
+        .additional-product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* How We Do It Section */
+        .process {
+            background: rgb(98, 147, 131);
+            padding: 70px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .process .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .process .section-title h2 {
+            color: black;
+        }
+
+        .process .section-title h2::after {
+            background: linear-gradient(to right, #ffd700, #ffffff);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 40px 25px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ffd700, #ffffff);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .step:hover::before {
+            transform: scaleX(1);
+        }
+
+        .step:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .step-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #ffd700, #ffffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .step:hover .step-icon {
+            transform: rotateY(180deg) scale(1.1);
+            background: linear-gradient(135deg, #ffffff, #ffd700);
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        .step p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .process.animated .step {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Why Choose Us Section */
+        .features {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            padding: 70px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .features .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .features .section-title h2 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .features.animated .section-title h2 {
+            opacity: 1;
+            transform: translateY(0);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .features .section-title h2::after {
+            background: linear-gradient(to right, #00d4ff, #ff6b6b);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature {
+            padding: 40px 25px;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease-in-out;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #00d4ff, #ff6b6b);
+            transform: scaleX(0);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .feature:hover::after {
+            transform: scaleX(1);
+        }
+
+        .feature:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.2rem;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature:hover .feature-icon {
+            transform: scale(1.1) rotate(15deg);
+            background: linear-gradient(135deg, #ff6b6b, #00d4ff);
+        }
+
+        .feature h3 {
+            margin-bottom: 15px;
+            color: #00d4ff;
+            font-size: 1.5rem;
+        }
+
+        .feature p {
+            color: #a0aec0;
+        }
+
+        .features.animated .feature {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Video Section */
+        .video-section {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .delivery-info {
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 0 20px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .delivery-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .delivery-info p {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .delivery-charge {
+            font-size: 1.2rem !important;
+            margin-top: 20px;
+            color: #ffd700;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* FAQ Section */
+        .faq {
+            background-color: rgb(186, 245, 211);
+            padding: 70px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: white;
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: var(--primary-dark);
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            background: #3A5A40;
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            background: #3A5A40;
+            padding: 25px 0;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite linear;
+        }
+
+        .footer-bottom p {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .website-link {
+            color: #f39c12;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .website-link:hover {
+            color: #e74c3c;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
+        }
+
+        .website-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .website-link:hover::after {
+            width: 100%;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+            }
+
+            100% {
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+
+        /* Pulse animation for the entire footer */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 #3A5A40;
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
+        }
+
+        .footer-bottom {
+            animation: pulse 2s infinite;
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content h2 {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text,
+            .about-image {
+                flex: none;
+                width: 100%;
+            }
+
+            .about-text {
+                margin-bottom: 30px;
+            }
+
+            .product-categories {
+                flex-wrap: wrap;
+            }
+
+            .category {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 15px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.4rem;
+                /* Adjusted for mobile */
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: rgb(103, 224, 101);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .delivery-info h3 {
+                font-size: 2rem;
+            }
+
+            .delivery-info p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 70vh;
+                min-height: 500px;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .category {
+                width: 200px;
+                height: 200px;
+            }
+
+            .featured-product-item {
+                width: 180px;
+            }
+
+            .featured-product-img {
+                width: 130px;
+                height: 130px;
+            }
+
+            .additional-product-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .step {
+                padding: 30px 20px;
+            }
+
+            .step-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+
+            .delivery-info h3 {
+                font-size: 1.8rem;
+            }
+
+            .delivery-info p {
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+
+            .promo-line {
+                font-size: 1rem;
+                padding: 10px 0;
+            }
+
+            .category {
+                width: 150px;
+                height: 150px;
+            }
+
+            .category-overlay {
+                font-size: 1.4rem;
+            }
+
+            .featured-product-item {
+                width: 160px;
+            }
+
+            .featured-product-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .additional-product-item {
+                width: 130px;
+            }
+
+            .additional-product-img {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(189, 252, 201);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-top: 8px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="logo-img">
+                    <img src="images/logo.jpg" alt="Rout Groceries Logo" class="logo-image">
+                </div>
+                <div class="logo-text">
+                    <h1>Rout Groceries</h1>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Promotion Line -->
+    <div class="promo-line">
+        <div class="promo-text">
+            <span class="promo-highlight">FREE DELIVERY</span> on orders over 499 | Use code: <span
+                class="promo-highlight">FRESH2024</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="slideshow">
+            <div class="slide active" style="background-image: url('images/groceries.jpg');">
+                <div class="slide-overlay">
+                    <div class="hero-content">
+                        <h2>Groceries</h2>
+                        <p>Fresh groceries, trusted pantry staples, and everyday essentials delivered free on orders over.</p>
+                        <a href="product.html" class="btn hero-btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('images/Bakery.jpg');">
+                <div class="slide-overlay">
+                    <div class="hero-content">
+                        <h2>Bakeries</h2>
+                        <p>Locally sourced, organic produce delivered straight from the farm to your table.</p>
+                        <a href="product.html" class="btn hero-btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('images/Drinks.jpg');">
+                <div class="slide-overlay">
+                    <div class="hero-content">
+                        <h2>Beverages</h2>
+                        <p>Refreshing beverages, juices, and everyday drink essentials with free delivery on orders over</p>
+                        <a href="product.html" class="btn hero-btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <div class="slider-dot active" data-index="0"></div>
+            <div class="slider-dot" data-index="1"></div>
+            <div class="slider-dot" data-index="2"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Rout Groceries</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <h2>Your Trusted Grocery Partner</h2>
+                    <p>At Rout Groceries, we believe that everyone deserves access to fresh, high-quality food without
+                        the hassle of visiting multiple stores. Our mission is to make grocery shopping convenient,
+                        affordable, and enjoyable.</p>
+                    <p>Founded in 2007, we've grown from a small local business to a trusted grocery delivery service
+                        serving thousands of satisfied customers. Our team carefully selects each product to ensure it
+                        meets our high standards for quality and freshness.</p>
+                    <p>We work directly with local farmers and trusted suppliers to bring you the best products at
+                        competitive prices. Our commitment to sustainability means we prioritize eco-friendly packaging
+                        and support local communities.</p>
+                    <a href="product.html" class="btn">Explore Our Products</a>
+                </div>
+                <div class="about-image animate-on-scroll">
+                    <img src="Images/Your Trusted Grocery Partner.jpg" alt="About Rout Groceries">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Brands Section -->
+    <section class="brands">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Trusted Brands</h2>
+            </div>
+            <div class="brands-slider">
+                <div class="brands-track">
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/Parle brand" alt="Organic Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="Images/Aashirvad brand.jpg" alt="Local Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/haldiram brand.jpg" alt="Premium Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/Vim brand.jpg" alt="Eco Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/surfexcel brand.jpg" alt="Organic Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/godrej brand.jpg" alt="Local Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/colgate brand.jpg" alt="Premium Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/Aachi brand" alt="Eco Brand">
+                        </div>
+                    </div>
+                    <!-- Duplicate items for seamless loop -->
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/fogg brand.jpg" alt="Organic Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/cocacola brand.jpg" alt="Local Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/tata sampann brand.jpg" alt="Premium Brand">
+                        </div>
+                    </div>
+                    <div class="brand-item">
+                        <div class="brand-image">
+                            <img src="images/popzo brand.jpg" alt="Eco Brand">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Products</h2>
+                <p>Discover our wide range of fresh and high-quality products</p>
+            </div>
+
+            <div class="product-categories">
+                <div class="category animate-on-scroll">
+                    <img src="images/Beverages.jpg" alt="Fresh Fruits">
+                    <div class="category-overlay">Beverages</div>
+                </div>
+                <div class="category animate-on-scroll">
+                    <img src="images/Bakery.jpg" alt="Vegetables">
+                    <div class="category-overlay">Bakeries</div>
+                </div>
+                <div class="category animate-on-scroll">
+                    <img src="images/diar.jpg" alt="Dairy Products">
+                    <div class="category-overlay">Dairy Products</div>
+                </div>
+            </div>
+
+            <div class="all-products">
+                <h3 class="section-subtitle">Featured Products</h3>
+
+                <!-- Featured Products Slider -->
+                <div class="featured-products-slider">
+                    <div class="slider-nav">
+                        <button class="slider-nav-btn prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="slider-nav-btn next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="featured-products-track">
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="Images/potatoes.jpg" alt="Organic Apples">
+                            </div>
+                            <h4 class="product-name">Potatoes</h4>
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Onions.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Onions</h4>
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/garlics.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Garlics</h4>
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Chickpeas.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">cheakpeas</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Ginger.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Ginger</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Dates.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Dates</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Semolina.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Semolina</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Basmati Rice.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Basmati rice</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Wheat Flour.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Wheat flour</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Moong Dal.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">Moong dal</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/White Sugar.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">White sugar</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Cardamom.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">cardamom</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Cumin Seeds.jpg" alt="Fresh Carrots">
+                            </div>
+                            <h4 class="product-name">cumin seeds</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Black Salt.jpg" alt="Organic Milk">
+                            </div>
+                            <h4 class="product-name">Black salt</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Chana Dal.jpg" alt="Whole Wheat Bread">
+                            </div>
+                            <h4 class="product-name">chana dal</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Brown Sugar.jpg" alt="Free Range Eggs">
+                            </div>
+                            <h4 class="product-name">Brown sugar</h4>
+
+                        </div>
+                        <div class="featured-product-item">
+                            <div class="featured-product-img">
+                                <img src="images/Fresh Bread.jpg" alt="Avocados">
+                            </div>
+                            <h4 class="product-name">Fresh bread</h4>
+
+                        </div>
+                    </div>
+
+                    <div class="slider-dots">
+                        <div class="slider-dot active"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                        <div class="slider-dot"></div>
+                    </div>
+                </div>
+
+                <div class="additional-products">
+                    <div class="additional-products-grid">
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/potatoes.jpg" alt="Bell Peppers">
+                            </div>
+                            <h4 class="product-name">Potatoes</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Onions.jpg" alt="Tomatoes">
+                            </div>
+                            <h4 class="product-name">onions</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Body Wash.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Body wash</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Biryani Masala.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Biriyani masala</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Ginger.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Ginger</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Garlic.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Garlic</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Horlicks.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Horlicks</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Chickpeas.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">cheakpeas</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Dates.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Dates</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Semolina.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">semolina</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Basmati Rice.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Basmati Rice</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Baby Soap.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Baby soap</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Flattened Rice.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Flattened Rice</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Wheat Flour.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Wheat flour</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/tide.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Tide</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/White Sugar.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">white sugar</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Aloe Vera Gel.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Alovera gel</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Brown Sugar.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Broccoli</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Coffee Powder.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Coffee powder</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Fresh Bread.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Fresh Bread</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/colgate.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Colgate</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Cardamom.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Cardmom</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Chana Dal.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Chana Dal</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Fish Masala.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Fish masala</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Garam Masala.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Garam Masala</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Lays Chips.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Lays chips</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Bath Sponge.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Bath sponge</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Margarine Spread.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Margarine spread</h4>
+                            >
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Baby Food.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Baby food</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Amul Milk.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Amul milk</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Baby Shampoo.jpg" alt="Tomatoes">
+                            </div>
+                            <h4 class="product-name">Baby shampoo</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Cumin Seeds.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">Cumin seeds</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Shampoo.jpg" alt="Broccoli">
+                            </div>
+                            <h4 class="product-name">shampoo</h4>
+
+                        </div>
+                        <div class="additional-product-item animate-on-scroll">
+                            <div class="additional-product-img">
+                                <img src="images/Besan.jpg" alt="Oranges">
+                            </div>
+                            <h4 class="product-name">Besan</h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How We Do It Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>How We Do It</h2>
+            </div>
+            <div class="process-steps">
+                <div class="step animate-on-scroll">
+                    <div class="step-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Place Your Order</h3>
+                    <p>Browse our wide selection of fresh products and place your order through our website.</p>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>We Prepare</h3>
+                    <p>Our team carefully selects the freshest items and prepares your order with attention to quality.
+                    </p>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>We deliver your groceries right to your doorstep at your preferred time slot.</p>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Enjoy Freshness</h3>
+                    <p>Receive your order and enjoy fresh, high-quality groceries without leaving your home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feedback Section -->
+    <section class="feedback">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="feedback-slider">
+                <div class="feedback-track">
+                    <div class="feedback-item">
+                        <div class="customer-info">
+                            <div class="customer-avatar">KR</div>
+                            <div class="customer-details">
+                                <h4>Kausik Rout</h4>
+                                <p>Regular Customer</p>
+                            </div>
+                        </div>
+                        <p class="feedback-text">"Rout Groceries has completely changed how I shop for groceries. The
+                            quality is consistently excellent, and delivery is always on time. Highly recommended!"</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="customer-info">
+                            <div class="customer-avatar">GG</div>
+                            <div class="customer-details">
+                                <h4>Giridhari Gouda</h4>
+                                <p>Family Shopper</p>
+                            </div>
+                        </div>
+                        <p class="feedback-text">"Rout Groceries has made my weekly shopping stress-free. Quality products, fair prices, and fresh produce every time. Delivery is always on schedule, which I love."</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="customer-info">
+                            <div class="customer-avatar">KS</div>
+                            <div class="customer-details">
+                                <h4>Kamlesh Singh</h4>
+                                <p>Health Conscious</p>
+                            </div>
+                        </div>
+                        <p class="feedback-text">"I'm very particular about the quality of my food, and Rout Groceries
+                            never disappoints. Their organic selection is fantastic, and the delivery is always prompt."
+                        </p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="customer-info">
+                            <div class="customer-avatar">MT</div>
+                            <div class="customer-details">
+                                <h4>Motilal Talia</h4>
+                                <p>Regular Customer</p>
+                            </div>
+                        </div>
+                        <p class="feedback-text">"Rout Groceries has completely changed how I shop for groceries. The
+                            quality is consistently excellent, and delivery is always on time. Highly recommended!"</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="feedback-item">
+                        <div class="customer-info">
+                            <div class="customer-avatar">NS</div>
+                            <div class="customer-details">
+                                <h4>Naresh Pradhan</h4>
+                                <p>Family Shopper</p>
+                            </div>
+                        </div>
+                        <p class="feedback-text">"Fresh groceries, easy ordering, and dependable delivery. Rout Groceries has completely changed how I shop for daily essentials."</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-container">
+            <video class="video-bg" autoplay muted loop>
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+                <div class="delivery-info">
+                    <h3>Fast & Reliable Delivery</h3>
+                    <p>We deliver 7 days a week</p>
+                    <p>Same-day delivery available</p>
+                    <p class="delivery-charge">Free delivery on orders over 499</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <span>What areas do you deliver to?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We currently deliver to most urban and suburban areas within a 20km radius of our
+                            distribution centers. During checkout, you can enter your zip code to confirm if we deliver
+                            to your location.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <span>How do I place an order?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can place an order through our website. Simply browse our products, add
+                            items to your cart, choose your delivery time slot, and complete the checkout process.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <span>What is your delivery fee?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer free delivery on all orders over 499. Same-day delivery may have an additional charge depending on the time of
+                            order.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <span>Can I modify or cancel my order?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can modify or cancel your order up to 2 hours before your scheduled delivery time. After
+                            that, our team will have already started preparing your order, so changes may not be
+                            possible.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <span>What if I'm not home during delivery?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If you're not home, our delivery driver will leave your groceries in a safe, shaded spot at
+                            your doorstep. For perishable items, we use insulated bags to maintain freshness for up to 2
+                            hours.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <span>Do you offer organic products?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We have a wide selection of certified organic fruits, vegetables, dairy products, and
+                            pantry items. You can filter products by "organic" when browsing our categories.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        <span>What is your return policy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If you're not satisfied with any item in your order, please contact us within 24 hours of
+                            delivery for a full refund or replacement. We stand behind the quality of all our products.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Rout Groceries</h3>
+                    <p>Your trusted partner for fresh, high-quality groceries delivered right to your doorstep.</p>
+
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="product.html">Products</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i>Badbil , Jamudiha , 756041</li>
+                        <li><i class="fas fa-phone"></i>+91 7735613751</li>
+                        <li><i class="fas fa-envelope"></i> info@routk5401@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="https://tegnifix.com" target="_blank" class="website-link">Tegnifix.com</a>. All
+                    rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Hero Slider
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (n + slides.length) % slides.length;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        // Auto slide change
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+
+        // Dot click events
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+
+        // Scroll Animation
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Initial check on page load
+        window.addEventListener('load', checkScroll);
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Featured Products Slider Navigation - Updated from index1.html
+        const featuredTrack = document.querySelector('.featured-products-track');
+        const featuredPrevBtn = document.querySelector('.prev-btn');
+        const featuredNextBtn = document.querySelector('.next-btn');
+        const featuredDots = document.querySelectorAll('.featured-products-slider .slider-dot');
+        const featuredItems = document.querySelectorAll('.featured-product-item');
+        let featuredCurrentIndex = 0;
+
+        // Clone items for infinite loop effect
+        function initializeCyclicSlider() {
+            // Clone first few items and append to end
+            const itemsPerView = getItemsPerView();
+            for (let i = 0; i < itemsPerView; i++) {
+                const clone = featuredItems[i].cloneNode(true);
+                featuredTrack.appendChild(clone);
+            }
+
+            // Clone last few items and prepend to beginning
+            for (let i = featuredItems.length - 1; i >= featuredItems.length - itemsPerView; i--) {
+                const clone = featuredItems[i].cloneNode(true);
+                featuredTrack.insertBefore(clone, featuredTrack.firstChild);
+            }
+
+            // Set initial position to show first original item
+            featuredCurrentIndex = getItemsPerView();
+            updateFeaturedSlider(true);
+        }
+
+        // Calculate items per view based on screen width
+        function getItemsPerView() {
+            const screenWidth = window.innerWidth;
+            if (screenWidth < 576) return 2;
+            if (screenWidth < 768) return 3;
+            if (screenWidth < 992) return 4;
+            return 5;
+        }
+
+        function updateFeaturedSlider(instant = false) {
+            const itemWidth = featuredItems[0].offsetWidth + 30; // width + gap
+            const translateX = -featuredCurrentIndex * itemWidth;
+
+            if (instant) {
+                featuredTrack.style.transition = 'none';
+            } else {
+                featuredTrack.style.transition = 'transform 0.5s ease';
+            }
+
+            featuredTrack.style.transform = `translateX(${translateX}px)`;
+
+            // Update dots based on original items only
+            const totalOriginalItems = featuredItems.length;
+            const currentDot = featuredCurrentIndex % totalOriginalItems;
+
+            featuredDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentDot);
+            });
+
+            // Reset position when reaching cloned items (for infinite loop)
+            setTimeout(() => {
+                const totalClones = getItemsPerView() * 2;
+                const totalItems = totalOriginalItems + totalClones;
+
+                if (featuredCurrentIndex >= totalOriginalItems + getItemsPerView()) {
+                    featuredCurrentIndex = getItemsPerView();
+                    featuredTrack.style.transition = 'none';
+                    featuredTrack.style.transform = `translateX(${-featuredCurrentIndex * itemWidth}px)`;
+                } else if (featuredCurrentIndex < getItemsPerView()) {
+                    featuredCurrentIndex = totalOriginalItems + getItemsPerView() - 1;
+                    featuredTrack.style.transition = 'none';
+                    featuredTrack.style.transform = `translateX(${-featuredCurrentIndex * itemWidth}px)`;
+                }
+            }, 500);
+        }
+
+        featuredPrevBtn.addEventListener('click', () => {
+            featuredCurrentIndex--;
+            updateFeaturedSlider();
+        });
+
+        featuredNextBtn.addEventListener('click', () => {
+            featuredCurrentIndex++;
+            updateFeaturedSlider();
+        });
+
+        // Dot navigation for featured products
+        featuredDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const itemsPerView = getItemsPerView();
+                featuredCurrentIndex = index + itemsPerView;
+                updateFeaturedSlider();
+            });
+        });
+
+        // Animate featured products
+        setTimeout(() => {
+            document.querySelectorAll('.featured-product-item').forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animated');
+                }, index * 100);
+            });
+        }, 500);
+
+        // Update slider on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // Reinitialize slider on resize
+                const itemWidth = featuredItems[0].offsetWidth + 30;
+                const currentPosition = featuredCurrentIndex * itemWidth;
+                featuredTrack.style.transition = 'none';
+                featuredTrack.style.transform = `translateX(${-currentPosition}px)`;
+            }, 250);
+        });
+
+        // Auto slide for cyclic effect (optional)
+        let autoSlideInterval;
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                featuredCurrentIndex++;
+                updateFeaturedSlider();
+            }, 4000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Pause auto slide on hover
+        featuredTrack.addEventListener('mouseenter', stopAutoSlide);
+        featuredTrack.addEventListener('mouseleave', startAutoSlide);
+
+        // Initialize slider
+        initializeCyclicSlider();
+        startAutoSlide();
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

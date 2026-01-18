@@ -1,0 +1,4434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rout Groceries - Fresh Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Variables and Base Styles */
+        :root {
+            --Primary: #00FF99;
+            --primary-light: #3cb371;
+            --primary-dark: #1f6b3f;
+            --Secondary: #0D0D0D;
+            --Accent: #FFD700;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --transition: all 0.4s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --Highlight: #00FFFF;
+            --Background: #111111;
+            --light-red: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #FFFDE7;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 70px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--Primary);
+            margin-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--Primary), var(--Secondary));
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--Primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-light), var(--Secondary));
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header Styles - From index.html */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgb(152, 251, 152);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        header.scrolled {
+            background: rgb(240, 255, 240);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--Primary), var(--Secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .logo-container:hover .logo-image {
+            transform: scale(1.1);
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--Primary), var(--Secondary));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--Primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+        }
+
+        .hamburger div {
+            height: 3px;
+            width: 100%;
+            background-color: var(--dark);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        /* Promotion Line Styles - From index.html */
+        .promo-line {
+            background: linear-gradient(135deg, #2e8b57, #ff7f50);
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 80px;
+        }
+
+        .promo-text {
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-highlight {
+            color: #ffd700;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Header Actions from product.html */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 10px 15px;
+            padding-right: 40px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--dark);
+            width: 200px;
+            transition: var(--transition);
+        }
+
+        .search-input::placeholder {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            width: 250px;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--Primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--Accent);
+            color: var(--Secondary);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 30px 0;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--Primary);
+        }
+
+        .categories-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+        }
+
+        .categories-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .categories-container::-webkit-scrollbar-thumb {
+            background: var(--Primary);
+            border-radius: 10px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid var(--primary-light);
+            border-radius: 50px;
+            color: var(--Primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--Primary);
+            color: white;
+        }
+
+        /* Product Controls */
+        .product-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+            color: var(--Secondary);
+        }
+
+        .sort-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sort-label {
+            font-weight: 600;
+            color: var(--Primary);
+        }
+
+        .sort-select {
+            padding: 10px 15px;
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius);
+            background: white;
+            color: var(--Secondary);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--Primary);
+        }
+
+        .product-weight {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: var(--Secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--Primary);
+            margin-bottom: 15px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-to-cart {
+            padding: 10px 20px;
+            background: var(--Primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        .wishlist-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary-light);
+            color: var(--Primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .wishlist-btn:hover,
+        .wishlist-btn.active {
+            background: var(--Primary);
+            color: white;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1100;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-title {
+            font-size: 1.5rem;
+            color: var(--Primary);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            color: var(--Primary);
+        }
+
+        .cart-items {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--Primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: var(--Primary);
+        }
+
+        .quantity {
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            color: #ff4444;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--Primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        /* Product Modal */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1200;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .product-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+
+        .product-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .modal-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .modal-details {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--Primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--Primary);
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-nutrition {
+            margin-bottom: 30px;
+        }
+
+        .nutrition-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--Primary);
+        }
+
+        .nutrition-list {
+            list-style: none;
+        }
+
+        .nutrition-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .modal-add-to-cart {
+            flex: 1;
+            padding: 15px;
+            background: var(--Primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        .modal-wishlist {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary-light);
+            color: var(--Primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-wishlist:hover,
+        .modal-wishlist.active {
+            background: var(--Primary);
+            color: white;
+        }
+
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .load-more {
+            padding: 15px 40px;
+            background: var(--Primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .load-more:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--Primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 100;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: #3A5A40;
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            background: #3A5A40;
+            padding: 25px 0;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite linear;
+        }
+
+        .footer-bottom p {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .website-link {
+            color: #f39c12;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .website-link:hover {
+            color: #e74c3c;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
+        }
+
+        .website-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .website-link:hover::after {
+            width: 100%;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+            }
+
+            100% {
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+
+        /* Pulse animation for the entire footer */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 #3A5A40;
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
+        }
+
+        .footer-bottom {
+            animation: pulse 2s infinite;
+        }
+
+
+        /* Mobile Search Overlay */
+        .mobile-search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-search-overlay.active {
+            display: flex;
+        }
+
+        .mobile-search-container {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            position: relative;
+        }
+
+        .mobile-search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+        }
+
+        .close-mobile-search {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        /* Checkout Modal */
+        .checkout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1300;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .checkout-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .checkout-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+
+        .checkout-modal.active .checkout-content {
+            transform: scale(1);
+        }
+
+        .checkout-title {
+            font-size: 1.8rem;
+            color: var(--Primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--Secondary);
+        }
+
+        .form-input {
+            padding: 12px 15px;
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--Primary);
+        }
+
+        .checkout-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 15px 0;
+        }
+
+        .checkout-summary h3 {
+            color: var(--Primary);
+            margin-bottom: 10px;
+        }
+
+        .checkout-summary ul {
+            list-style: none;
+        }
+
+        .checkout-summary li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkout-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .confirm-checkout {
+            flex: 1;
+            padding: 15px;
+            background: var(--Primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .confirm-checkout:hover {
+            background: var(--primary-dark);
+        }
+
+        .cancel-checkout {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            color: var(--Secondary);
+            border: 2px solid var(--gray);
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cancel-checkout:hover {
+            background: #e9ecef;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--Primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 2000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        /* Responsive Design - Enhanced for Mobile */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-actions {
+                gap: 15px;
+            }
+
+            .search-input {
+                width: 150px;
+            }
+
+            .search-input:focus {
+                width: 180px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 15px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: rgb(103, 224, 101);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px 20px;
+                font-size: 1.1rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .search-input {
+                display: none;
+            }
+
+            .search-btn {
+                position: static;
+                transform: none;
+                background: none;
+                border: none;
+                color: var(--dark);
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                max-width: 380px;
+            }
+
+            .modal-body {
+                flex-direction: column;
+            }
+
+            .modal-image,
+            .modal-details {
+                min-width: 100%;
+            }
+
+            .modal-image img {
+                height: 300px;
+            }
+
+            .modal-details {
+                padding: 20px;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-price {
+                font-size: 1.3rem;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .product-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .sort-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .sort-select {
+                width: 70%;
+            }
+
+            .category-title {
+                font-size: 1.1rem;
+            }
+
+            .category-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .product-card {
+                margin-bottom: 10px;
+            }
+
+            .product-info {
+                padding: 15px;
+            }
+
+            .product-name {
+                font-size: 1.1rem;
+            }
+
+            .product-price {
+                font-size: 1.2rem;
+            }
+
+            .add-to-cart {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .wishlist-btn {
+                width: 35px;
+                height: 35px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo-img {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cart-item-image {
+                width: 100%;
+                height: 150px;
+                margin-bottom: 10px;
+            }
+
+            .cart-item-controls {
+                justify-content: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .main-content {
+                margin-top: 80px;
+                padding: 20px 0;
+            }
+
+            .load-more {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product-name {
+                font-size: 1rem;
+            }
+
+            .product-price {
+                font-size: 1.1rem;
+            }
+
+            .add-to-cart {
+                padding: 7px 12px;
+                font-size: 0.85rem;
+            }
+
+            .wishlist-btn {
+                width: 32px;
+                height: 32px;
+            }
+
+            .category-btn {
+                padding: 7px 14px;
+                font-size: 0.85rem;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+            }
+
+            .modal-price {
+                font-size: 1.2rem;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-wishlist {
+                width: 100%;
+                height: 45px;
+                border-radius: var(--radius);
+                margin-top: 10px;
+            }
+
+            .header-container {
+                padding: 10px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+
+            .logo-img {
+                width: 35px;
+                height: 35px;
+                margin-right: 8px;
+            }
+
+            .cart-icon {
+                font-size: 1.3rem;
+            }
+
+            .cart-count {
+                width: 18px;
+                height: 18px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header - From index.html -->
+    <header id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="logo-img">
+                    <img src="Images/logo.jpg" alt="Rout Groceries Logo" class="logo-image">
+                </div>
+                <div class="logo-text">
+                    <h1>Rout Groceries</h1>
+                </div>
+            </a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Search products...">
+                        <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Search Overlay -->
+    <div class="mobile-search-overlay" id="mobileSearchOverlay">
+        <div class="mobile-search-container">
+            <input type="text" class="mobile-search-input" placeholder="Search products...">
+            <button class="close-mobile-search" id="closeMobileSearch"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Category Filter -->
+            <section class="category-filter">
+                <h3 class="category-title">Browse Categories</h3>
+                <div class="categories-container">
+                    <button class="category-btn active" data-category="all">All Products</button>
+                    <button class="category-btn" data-category="fruits">Fruits & Vegetables</button>
+                    <button class="category-btn" data-category="dairy">Dairy & Bakery</button>
+                    <button class="category-btn" data-category="staples">Staples & Grains</button>
+                    <button class="category-btn" data-category="spices">Masala & Spices</button>
+                    <button class="category-btn" data-category="snacks">Snacks & Packaged Food</button>
+                    <button class="category-btn" data-category="beverages">Beverages</button>
+                    <button class="category-btn" data-category="personal">Personal Care</button>
+                    <button class="category-btn" data-category="home">Home & Cleaning</button>
+                    <button class="category-btn" data-category="kids">Baby & Kids</button>
+                </div>
+
+            </section>
+
+            <!-- Product Controls -->
+            <section class="product-controls">
+                <div class="results-count">Showing <span id="productCount">12</span> products</div>
+                <div class="sort-container">
+                    <span class="sort-label">Sort By:</span>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="default">Default</option>
+                        <option value="name">Name: A-Z</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="products-grid" id="productsGrid">
+
+                <!-- Fruits -->
+                <div class="product-card" data-category="fruits" data-id="1">
+                    <img src="Images/Dates.jpg" alt="Bananas" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Dates</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Naturally sweet, nutritious, energy-boosting dates.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="1">Add to Cart</button><button
+                                class="wishlist-btn" data-id="1"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fruits" data-id="2">
+                    <img src="images/Chickpeas.jpg" alt="Chickpeas" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Chickpeas</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Nutritious and protein-rich chickpeas, perfect for salads and
+                            cooking.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="2">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="2"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Vegetables -->
+                <div class="product-card" data-category="fruits" data-id="3">
+                    <img src="images/Onions.jpg" alt="Onions" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Onions</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Fresh kitchen essential used daily.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="3">Add to Cart</button><button
+                                class="wishlist-btn" data-id="3"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="vegetables" data-id="4">
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG90YXRvZXN8ZW58MHx8MHx8fDA%3D"
+                        alt="Potatoes" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Potatoes</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Farm fresh potatoes perfect for all recipes.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="4">Add to Cart</button><button
+                                class="wishlist-btn" data-id="4"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <!-- Dairy -->
+                <div class="product-card" data-category="dairy" data-id="5">
+                    <img src="images/Amul Milk.jpg" alt="Milk" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Amul Milk</h3>
+                        <p class="product-weight">500l pack</p>
+                        <p class="product-description">Pure and fresh toned milk.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="5">Add to Cart</button><button
+                                class="wishlist-btn" data-id="5"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="6">
+                    <img src="images/Fresh Bread.jpg" alt="Bread" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Bread</h3>
+                        <p class="product-weight">400g</p>
+                        <p class="product-description">Soft and fresh bakery bread.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="6">Add to Cart</button><button
+                                class="wishlist-btn" data-id="6"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <!-- Snacks -->
+                <div class="product-card" data-category="snacks" data-id="7">
+                    <img src="images/Lays Chips.jpg" alt="Chips" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Lays Chips</h3>
+                        <p class="product-weight">120g</p>
+                        <p class="product-description">Crunchy salted chips.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="7">Add to Cart</button><button
+                                class="wishlist-btn" data-id="7"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="8">
+                    <img src="images/Milk Biscuits.jpg" alt="Biscuits" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Milk Biscuits</h3>
+                        <p class="product-weight">200g</p>
+                        <p class="product-description">Perfect tea-time snack.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="8">Add to Cart</button><button
+                                class="wishlist-btn" data-id="8"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <!-- Beverages -->
+                <div class="product-card" data-category="beverages" data-id="9">
+                    <img src="images/Coca Cola.jpg" alt="Cold drink" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Coca Cola</h3>
+                        <p class="product-weight">1.25L</p>
+                        <p class="product-description">Enjoy chilled.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="9">Add to Cart</button><button
+                                class="wishlist-btn" data-id="9"><i class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+
+
+                <div class="product-card" data-category="fruits" data-id="11">
+                    <img src="images/Ginger.jpg" alt="Potatoes" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Ginger</h3>
+                        <p class="product-weight">200g</p>
+                        <p class="product-description">Farm fresh Gingers perfect for all recipes.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="11">Add to
+                                Cart</button><button class="wishlist-btn" data-id="11"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="fruits" data-id="12">
+                    <img src="images/Garlic.jpg" alt="Potatoes" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Garlic</h3>
+                        <p class="product-weight">200g</p>
+                        <p class="product-description">Farm fresh Garlics perfect for all recipes.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="12">Add to
+                                Cart</button><button class="wishlist-btn" data-id="12"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="13">
+                    <img src="images/Curd.jpg" alt="Milk" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Curd</h3>
+                        <p class="product-weight">500g pack</p>
+                        <p class="product-description">Pure and fresh toned milk.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="13">Add to
+                                Cart</button><button class="wishlist-btn" data-id="13"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="14">
+                    <img src="images/Amul Butter.jpg" alt="Butter" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Amul Butter</h3>
+                        <p class="product-weight">100g pack</p>
+                        <p class="product-description">Rich and creamy butter.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="14">Add to
+                                Cart</button><button class="wishlist-btn" data-id="14"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="15">
+                    <img src="images/Margarine Spread.jpg" alt="Margarine" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Margarine Spread</h3>
+                        <p class="product-weight">200g tub</p>
+                        <p class="product-description">Healthy vegetable margarine.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="15">Add to
+                                Cart</button><button class="wishlist-btn" data-id="15"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="16">
+                    <img src="images/Lassi.jpg" alt="Lassi" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Lassi</h3>
+                        <p class="product-weight">500ml bottle</p>
+                        <p class="product-description">Refreshing traditional yogurt-based drink.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="16">Add to
+                                Cart</button><button class="wishlist-btn" data-id="16"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="17">
+                    <img src="images/Paneer.jpg" alt="Paneer" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Paneer</h3>
+                        <p class="product-weight">250g pack</p>
+                        <p class="product-description">Fresh and soft Indian cottage cheese.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="17">Add to
+                                Cart</button><button class="wishlist-btn" data-id="17"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="18">
+                    <img src="images/Ghee.jpg" alt="Ghee" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Ghee</h3>
+                        <p class="product-weight">500g jar</p>
+                        <p class="product-description">Pure clarified butter with rich aroma.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="18">Add to
+                                Cart</button><button class="wishlist-btn" data-id="18"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="19">
+                    <img src="images/Milk Powder.jpg" alt="Milk Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Milk Powder</h3>
+                        <p class="product-weight">1kg pack</p>
+                        <p class="product-description">High-quality instant milk powder.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="19">Add to
+                                Cart</button><button class="wishlist-btn" data-id="19"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy" data-id="20">
+                    <img src="images/cake.jpg"
+                        alt="Cake" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Cake</h3>
+                        <p class="product-weight">500g box</p>
+                        <p class="product-description">Delicious and soft cream cake.</p>
+                        <div class="product-actions"><button class="add-to-cart" data-id="20">Add to
+                                Cart</button><button class="wishlist-btn" data-id="20"><i
+                                    class="far fa-heart"></i></button></div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="21">
+                    <img src="images/Basmati Rice.jpg" alt="Basmati Rice" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Basmati Rice</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Long-grain aromatic rice, perfect for daily meals.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="21">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="21"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="22">
+                    <img src="images/Flattened Rice.jpg" alt="Flattened Rice" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Flattened Rice</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Light and nutritious, ideal for quick snacks and breakfasts.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="22">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="22"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="23">
+                    <img src="images/Refined Flour.jpg" alt="Refined Flour" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Refined Flour</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Fine and smooth refined flour for baking and cooking.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="23">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="23"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="24">
+                    <img src="images/Wheat Flour.jpg" alt="Wheat Flour" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Wheat Flour</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Whole wheat flour rich in fiber and essential nutrients.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="24">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="24"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="25">
+                    <img src="images/Besan.jpg" alt="Besan" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Besan</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Gram flour used in snacks, sweets, and savory dishes.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="25">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="25"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="26">
+                    <img src="images/Semolina.jpg" alt="Semolina" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Semolina</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Coarse wheat product used for upma and halwa.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="26">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="26"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="27">
+                    <img src="images/Moong Dal.jpg" alt="Moong Dal" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Moong Dal</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Protein-rich split yellow gram, easy to digest.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="27">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="27"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="28">
+                    <img src="images/Chana Dal.jpg" alt="Chana Dal" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Chana Dal</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Rich in protein and fiber, perfect for curries and soups.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="28">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="28"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="29">
+                    <img src="images/Sunflower Oil.jpg" alt="Sunflower Oil" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Sunflower Oil</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Light and healthy oil for everyday cooking.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="29">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="29"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="30">
+                    <img src="images/Mustard Oil.jpg" alt="Mustard Oil" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Mustard Oil</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Strong and flavorful oil used in Indian cooking.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="30">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="30"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="31">
+                    <img src="images/Coconut Oil.jpg" alt="Coconut Oil" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Coconut Oil</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Pure and natural coconut oil for cooking and care.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="31">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="31"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="32">
+                    <img src="images/White Sugar.jpg" alt="White Sugar" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">White Sugar</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Refined sugar ideal for desserts, tea, and sweets.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="32">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="32"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="33">
+                    <img src="images/Masoor Dal.jpg" alt="Masoor Dal" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Masoor Dal</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Red lentils rich in protein and easy to cook.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="33">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="33"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="staples" data-id="34">
+                    <img src="images/Brown Sugar.jpg" alt="Brown Sugar" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Brown Sugar</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Natural brown sugar with a rich molasses flavor.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="34">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="34"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="35">
+                    <img src="images/Turmeric Powder.jpg" alt="Turmeric Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Turmeric Powder</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Pure turmeric powder with rich color and natural aroma.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="35">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="35"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="36">
+                    <img src="images/Red Chilli Powder.jpg" alt="Red Chilli Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Red Chilli Powder</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Spicy red chilli powder that adds heat and flavor to every dish.
+                        </p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="36">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="36"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="37">
+                    <img src="images/Cumin Powder.jpg" alt="Cumin Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Cumin Powder</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Ground cumin with a warm, earthy flavor perfect for curries.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="37">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="37"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="38">
+                    <img src="images/Garam Masala.jpg" alt="Garam Masala" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Garam Masala</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">A traditional blend of aromatic spices to enhance Indian dishes.
+                        </p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="38">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="38"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="39">
+                    <img src="images/Black Pepper.jpg" alt="Black Pepper" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Black Pepper</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">Whole black peppercorns with strong flavor and aroma.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="39">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="39"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="40">
+                    <img src="images/Coriander Powder.jpg" alt="Coriander Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Coriander Powder</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Freshly ground coriander seeds adding mild citrusy flavor.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="40">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="40"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="41">
+                    <img src="images/Cumin Seeds.jpg" alt="Cumin Seeds" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Cumin Seeds</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Whole cumin seeds perfect for tempering and seasoning.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="41">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="41"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="42">
+                    <img src="images/Cardamom.jpg" alt="Cardamom" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Cardamom</h3>
+                        <p class="product-weight">250g</p>
+                        <p class="product-description">Aromatic cardamom pods used for flavoring sweets and curries.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="42">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="42"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="43">
+                    <img src="images/Chicken Masala.jpg" alt="Chicken Masala" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Chicken Masala</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">Richly spiced chicken masala for flavorful non-veg dishes.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="43">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="43"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="44">
+                    <img src="images/Chole Masala.jpg" alt="Chole Masala" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Chole Masala</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">A flavorful mix of spices for authentic Punjabi chole.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="44">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="44"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="45">
+                    <img src="images/Biryani Masala.jpg" alt="Biryani Masala" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Biryani Masala</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">Premium biryani masala for rich and aromatic rice dishes.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="45">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="45"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="46">
+                    <img src="images/Fish Masala.jpg" alt="Fish Masala" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Fish Masala</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">Specially blended masala to add tangy flavor to fish curries.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="46">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="46"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="47">
+                    <img src="images/Black Salt.jpg" alt="Black Salt" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Black Salt</h3>
+                        <p class="product-weight">1kg</p>
+                        <p class="product-description">Mineral-rich black salt with a distinct tangy taste.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="47">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="47"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="48">
+                    <img src="images/Dry Ginger Powder.jpg" alt="Dry Ginger Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Dry Ginger Powder</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">Finely ground dry ginger for flavoring curries and sweets.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="48">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="48"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices" data-id="49">
+                    <img src="images/Red Chilli Powder.jpg" alt="Kashmiri Red Chilli Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Kashmiri Red Chilli Powder</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">Vibrant red chilli powder with mild heat and deep color.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="49">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="49"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="product-card" data-category="beverages" data-id="51">
+                    <img src="images/Lemon Soda.jpg" alt="Lemon Soda" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Lemon Soda</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Refreshing lemon soda with a perfect tangy twist.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="51">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="51"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="beverages" data-id="52">
+                    <img src="images/Herbal Tea.jpg" alt="Herbal Tea" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Herbal Tea</h3>
+                        <p class="product-weight">250g</p>
+                        <p class="product-description">Soothing herbal tea with natural antioxidants.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="52">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="52"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="beverages" data-id="53">
+                    <img src="images/Coffee Powder.jpg" alt="Coffee Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Coffee Powder</h3>
+                        <p class="product-weight">200g</p>
+                        <p class="product-description">Rich and aromatic coffee powder for perfect mornings.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="53">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="53"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="beverages" data-id="54">
+                    <img src="images/Lemon Juice.jpg" alt="Lemon Juice" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Lemon Juice</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Fresh lemon juice full of vitamin C and tangy flavor.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="54">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="54"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="beverages" data-id="55">
+                    <img src="images/Jaljeera Drink.jpg" alt="Jaljeera Drink" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Jaljeera Drink</h3>
+                        <p class="product-weight">750ml</p>
+                        <p class="product-description">Tangy and spicy jaljeera drink perfect for digestion.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="55">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="55"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="beverages" data-id="56">
+                    <img src="images/Mango Juice.jpg" alt="Mango Juice" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Mango Juice</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Sweet and refreshing mango juice made from ripe mangoes.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="56">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="56"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="beverages" data-id="57">
+                    <img src="images/Apple Juice.jpg" alt="Apple Juice" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Apple Juice</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Freshly pressed apple juice packed with nutrients.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="57">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="57"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="58">
+                    <img src="images/Coca-Cola.jpg" alt="Coca-Cola" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Coca-Cola</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Classic carbonated drink with a refreshing taste.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="58">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="58"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="59">
+                    <img src="images/Pepsi.jpg" alt="Pepsi" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Pepsi</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Refreshing cola beverage with a bold flavor.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="59">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="59"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="60">
+                    <img src="images/Sprite.jpg" alt="Sprite" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Sprite</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Lemon-lime soda for instant freshness and fizz.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="60">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="60"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="61">
+                    <img src="images/Thums Up.jpg" alt="Thums Up" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Thums Up</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Strong cola drink with a bold, thunderous taste.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="61">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="61"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="62">
+                    <img src="images/7up.jpg" alt="7UP" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">7UP</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Crisp, clean, and refreshing lemon-lime drink.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="62">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="62"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="63">
+                    <img src="images/Redbull.jpg" alt="Redbull" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Redbull</h3>
+                        <p class="product-weight">250ml</p>
+                        <p class="product-description">Energy drink to boost performance and alertness.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="63">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="63"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="64">
+                    <img src="images/Horlicks.jpg" alt="Horlicks" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Horlicks</h3>
+                        <p class="product-weight">500g</p>
+                        <p class="product-description">Nutritious malt drink for strength and energy.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="64">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="64"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="65">
+                    <img src="images/Amul Cool.jpg" alt="Amul Cool" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Amul Cool</h3>
+                        <p class="product-weight">200ml</p>
+                        <p class="product-description">Chilled flavored milk drink from Amul for refreshment.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="65">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="65"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="snacks" data-id="66">
+                    <img src="images/Mineral Water.jpg" alt="Mineral Water" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Mineral Water</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Pure and clean mineral water for hydration and freshness.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="66">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="66"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="personal" data-id="67">
+                    <img src="images/Lip Balm.jpg" alt="Lip Balm" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Lip Balm</h3>
+                        <p class="product-weight">15g</p>
+                        <p class="product-description">Moisturizing lip balm to keep your lips soft and smooth.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="67">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="67"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="product-card" data-category="personal" data-id="70">
+                    <img src="images/Shampoo.jpg" alt="Shampoo" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Shampoo</h3>
+                        <p class="product-weight">250ml</p>
+                        <p class="product-description">Cleanses and strengthens your hair with every wash.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="70">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="70"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="product-card" data-category="personal" data-id="73">
+                    <img src="images/Toothpaste.jpg" alt="Toothpaste" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Toothpaste</h3>
+                        <p class="product-weight">150g</p>
+                        <p class="product-description">Fluoride toothpaste for fresh breath and strong teeth.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="73">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="73"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="personal" data-id="74">
+                    <img src="images/Tongue Cleaner.jpg" alt="Tongue Cleaner" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Tongue Cleaner</h3>
+                        <p class="product-weight">1pc</p>
+                        <p class="product-description">Stainless steel cleaner for better oral hygiene.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="74">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="74"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="personal" data-id="75">
+                    <img src="images/Body Lotion.jpg" alt="Body Lotion" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Body Lotion</h3>
+                        <p class="product-weight">200ml</p>
+                        <p class="product-description">Hydrating lotion for smooth and glowing skin.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="75">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="75"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="personal" data-id="76">
+                    <img src="images/Body Wash.jpg" alt="Body Wash" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Body Wash</h3>
+                        <p class="product-weight">250ml</p>
+                        <p class="product-description">Refreshing body wash with a long-lasting fragrance.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="76">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="76"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="personal" data-id="77">
+                    <img src="images/Bath Sponge.jpg" alt="Bath Sponge" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Bath Sponge</h3>
+                        <p class="product-weight">1pc</p>
+                        <p class="product-description">Soft bath sponge for gentle exfoliation and cleansing.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="77">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="77"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="product-card" data-category="personal" data-id="79">
+                    <img src="images/Aloe Vera Gel.jpg" alt="Aloe Vera Gel" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Aloe Vera Gel</h3>
+                        <p class="product-weight">150ml</p>
+                        <p class="product-description">Pure aloe vera gel for soothing and moisturizing skin.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="79">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="79"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-id="80">
+                    <img src="images/Floor Cleaner.jpg" alt="Floor Cleaner" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Floor Cleaner</h3>
+                        <p class="product-weight">1L</p>
+                        <p class="product-description">Powerful floor cleaner that removes stains and kills germs.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="80">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="80"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-id="81">
+                    <img src="images/Toilet Cleaner.jpg" alt="Toilet Cleaner" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Toilet Cleaner</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Thick liquid formula for deep toilet cleaning and freshness.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="81">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="81"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-id="82">
+                    <img src="images/Glass Cleaner.jpg" alt="Glass Cleaner" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Glass Cleaner</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Gives a streak-free shine to glass and mirrors.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="82">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="82"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-id="83">
+                    <img src="images/Kitchen Cleaner.jpg" alt="Kitchen Cleaner" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Kitchen Cleaner</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Removes grease and stains to keep your kitchen spotless.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="83">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="83"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="product-card" data-category="home" data-id="86">
+                    <img src="images/Fabric Softener.jpg" alt="Fabric Softener" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Fabric Softener</h3>
+                        <p class="product-weight">500ml</p>
+                        <p class="product-description">Keeps clothes soft and gives them a refreshing fragrance.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="86">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="86"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-id="87">
+                    <img src="images/Mop & Bucket Set.jpg" alt="Mop & Bucket Set" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Mop & Bucket Set</h3>
+                        <p class="product-weight">1 Set</p>
+                        <p class="product-description">360° spin mop with bucket for easy and efficient floor cleaning.
+                        </p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="87">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="87"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-id="88">
+                    <img src="images/Scrub Sponge.jpg" alt="Scrub Sponge" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Scrub Sponge</h3>
+                        <p class="product-weight">2pcs</p>
+                        <p class="product-description">Dual-layer scrub sponge for effective kitchen and utensil
+                            cleaning.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="88">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="88"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-id="89">
+                    <img src="images/Garbage Bag Roll.jpg" alt="Garbage Bag Roll" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Garbage Bag Roll</h3>
+                        <p class="product-weight">1 Roll</p>
+                        <p class="product-description">Durable garbage bags ideal for kitchen and home waste.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="89">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="89"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="product-card" data-category="kids" data-id="94">
+                    <img src="images/Baby Shampoo.jpg" alt="Baby Shampoo" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Baby Shampoo</h3>
+                        <p class="product-weight">200ml</p>
+                        <p class="product-description">Tear-free baby shampoo for soft, shiny, and clean baby hair.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="94">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="94"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kids" data-id="95">
+                    <img src="images/Baby Soap.jpg" alt="Baby Soap" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Baby Soap</h3>
+                        <p class="product-weight">100g</p>
+                        <p class="product-description">Mild and moisturizing baby soap for gentle daily cleansing.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="95">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="95"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kids" data-id="96">
+                    <img src="images/Baby Powder.jpg" alt="Baby Powder" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Baby Powder</h3>
+                        <p class="product-weight">200g</p>
+                        <p class="product-description">Soft baby powder to keep your baby’s skin fresh and dry all day.
+                        </p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="96">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="96"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="product-card" data-category="kids" data-id="98">
+                    <img src="images/Baby Wipes.jpg" alt="Baby Wipes" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Baby Wipes</h3>
+                        <p class="product-weight">Pack of 80</p>
+                        <p class="product-description">Gentle, alcohol-free wipes for baby’s delicate skin.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="98">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="98"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kids" data-id="99">
+                    <img src="images/Feeding Bottle.jpg" alt="Feeding Bottle" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Feeding Bottle</h3>
+                        <p class="product-weight">250ml</p>
+                        <p class="product-description">Safe, BPA-free feeding bottle with anti-colic nipple.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="99">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="99"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kids" data-id="100">
+                    <img src="images/Baby Food.jpg" alt="Baby Food" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">Baby Food</h3>
+                        <p class="product-weight">200g</p>
+                        <p class="product-description">Nutritious baby food rich in vitamins and essential minerals.</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="100">Add to Cart</button>
+                            <button class="wishlist-btn" data-id="100"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </section>
+
+
+            <!-- Load More Button -->
+            <section class="load-more-container">
+                <button class="load-more" id="loadMore">Load More Products</button>
+            </section>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2 class="cart-title">Your Cart</h2>
+            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically loaded here -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total Items:</span>
+                <span id="cartTotal">0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <h2 class="checkout-title">Checkout</h2>
+            <div class="checkout-summary">
+                <h3>Order Summary</h3>
+                <ul id="checkoutSummary">
+                    <!-- Order summary will be dynamically loaded here -->
+                </ul>
+                <div class="cart-total">
+                    <span>Total Items:</span>
+                    <span id="checkoutTotal">0</span>
+                </div>
+            </div>
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-group">
+                    <label class="form-label" for="customerName">Full Name</label>
+                    <input type="text" class="form-input" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="customerPhone">Phone Number</label>
+                    <input type="tel" class="form-input" id="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="customerAddress">Delivery Address</label>
+                    <textarea class="form-input" id="customerAddress" rows="3" required></textarea>
+                </div>
+                <div class="checkout-actions">
+                    <button type="button" class="cancel-checkout" id="cancelCheckout">Cancel</button>
+                    <button type="button" class="confirm-checkout" id="confirmCheckout">Send via WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Footer  -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Rout Groceries</h3>
+                    <p>Your trusted partner for fresh, high-quality groceries delivered right to your doorstep.</p>
+
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="product.html">Products</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i>Badbil , Jamudiha , 756041</li>
+                        <li><i class="fas fa-phone"></i>+91 7735613751</li>
+                        <li><i class="fas fa-envelope"></i> info@routk5401@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="https://tegnifix.com" target="_blank" class="website-link">Tegnifix.com</a>. All
+                    rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product data for modal and cart functionality
+        const products = {
+            1: {
+                id: 1,
+                name: "Dates",
+                weight: "200g",
+                category: "fruits",
+                description: "Naturally sweet, nutritious, energy-boosting dates.",
+                image: "Images/Dates.jpg",
+                nutrition: ["Calories: 282 kcal ", "Carbohydrates: 75 g", "Fiber: 8g", "Potassium: 656 mg"]
+            },
+            2: {
+                id: 2,
+                name: "Chickpeas",
+                weight: "1kg",
+                category: "fruits",
+                description: "Nutritious and protein-rich chickpeas, perfect for salads and cooking.",
+                image: "images/Chickpeas.jpg",
+                nutrition: ["Calories: 139 per 100g", "Protein: 7g", "Fiber: 4g", "Carbohydrates: 22g"]
+            },
+            3: {
+                id: 3,
+                name: "Onions",
+                weight: "1kg",
+                category: "fruits",
+                description: "Fresh onions that add flavor to every dish.",
+                image: " images/Onions.jpg",
+                nutrition: ["Calories: 40 per 100g", "Carbohydrates: 9g", "Fiber: 1.7g", "Vitamin C: 12%"]
+            },
+            4: {
+                id: 4,
+                name: "Potatoes",
+                weight: "1kg",
+                category: "vegetables",
+                description: "Farm-fresh potatoes, ideal for curries and fries.",
+                image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG90YXRvZXN8ZW58MHx8MHx8fDA%3D",
+                nutrition: ["Calories: 77 per 100g", "Carbohydrates: 17g", "Fiber: 2.2g", "Vitamin C: 20%"]
+            },
+            5: {
+                id: 5,
+                name: "Amul Milk",
+                weight: "1L",
+                category: "dairy",
+                description: "Pure and fresh toned milk, rich in calcium and protein.",
+                image: "images/Amul Milk.jpg",
+                nutrition: ["Calories: 61 per 100ml", "Protein: 3.2g", "Fat: 3.5g", "Calcium: 120mg"]
+            },
+            6: {
+                id: 6,
+                name: "Fresh Bread",
+                weight: "400g",
+                category: "dairy",
+                description: "Soft, freshly baked bread perfect for breakfast and sandwiches.",
+                image: "images/Fresh Bread.jpg",
+                nutrition: ["Calories: 260 per 100g", "Carbohydrates: 49g", "Protein: 9g", "Fiber: 3g"]
+            },
+            7: {
+                id: 7,
+                name: "Lays chips",
+                weight: "5kg",
+                category: "staples",
+                description: "Long-grain aromatic rice for a perfect meal.",
+                image: "images/Lays chips.jpg",
+                nutrition: ["Calories: 130 per 100g", "Carbohydrates: 28g", "Protein: 2.7g", "Fat: 0.3g"]
+            },
+            8: {
+                id: 8,
+                name: "Milk Biscuits",
+                weight: "5kg",
+                category: "staples",
+                description: "Stone-ground whole wheat flour for soft rotis.",
+                image: "images/Milk Biscuits.jpg",
+                nutrition: ["Calories: 340 per 100g", "Protein: 13g", "Carbohydrates: 72g", "Fiber: 10g"]
+            },
+            9: {
+                id: 9,
+                name: "Coca Cola",
+                weight: "200g",
+                category: "spices",
+                description: "Pure turmeric powder for natural flavor and color.",
+                image: "images/Coca Cola.jpg",
+                nutrition: ["Calories: 312 per 100g", "Fiber: 23g", "Iron: 55mg", "Curcumin: 3%"]
+            },
+            10: {
+                id: 10,
+                name: "Red Chili Powder",
+                weight: "200g",
+                category: "spices",
+                description: "Hot and pure chili powder for rich taste.",
+                image: "https://images.unsplash.com/photo-1604152135912-04a62015f2d0?auto=format&fit=crop&w=500&q=60",
+                nutrition: ["Calories: 282 per 100g", "Vitamin A: 48%", "Iron: 1.2mg", "Capsaicin: 1%"]
+            },
+            11: {
+                id: 11,
+                name: "Ginger",
+                weight: "200g",
+                category: "fruits",
+                description: "Crispy, salted potato chips with classic flavor.",
+                image: "images/Ginger.jpg",
+                nutrition: ["Calories: 536 per 100g", "Fat: 35g", "Sodium: 520mg", "Carbs: 53g"]
+            },
+            12: {
+                id: 12,
+                name: "Garlic",
+                weight: "200g",
+                category: "fruits",
+                description: "Light and crunchy biscuits made with wheat flour.",
+                image: "images/Garlic.jpg",
+                nutrition: ["Calories: 480 per 100g", "Sugar: 20g", "Protein: 6g", "Fat: 18g"]
+            },
+            13: {
+                id: 13,
+                name: "Curd",
+                weight: "1.25L",
+                category: "beverages",
+                description: "The refreshing taste of Coca Cola for every occasion.",
+                image: "images/Curd.jpg",
+                nutrition: ["Calories: 42 per 100ml", "Carbohydrates: 10.6g", "Sugar: 10.6g", "Caffeine: 9mg"]
+            },
+            14: {
+                id: 14,
+                name: "Amul Butter",
+                weight: "100g pack",
+                category: "dairy",
+                description: "Rich and creamy butter.",
+                image: "images/Amul Butter.jpg",
+                nutrition: ["Calories: 717 per 100g", "Fat: 81g", "Protein: 0.9g", "Carbohydrates: 0.1g"]
+            },
+            15: {
+                id: 15,
+                name: "Margarine Spread",
+                weight: "200g tub",
+                category: "dairy",
+                description: "Healthy vegetable margarine.",
+                image: "images/Margarine Spread.jpg",
+                nutrition: ["Calories: 620 per 100g", "Fat: 70g", "Protein: 0.2g", "Carbohydrates: 0.4g"]
+            },
+            16: {
+                id: 16,
+                name: "Lassi",
+                weight: "500ml bottle",
+                category: "dairy",
+                description: "Refreshing traditional yogurt-based drink, perfect for summer.",
+                image: "images/Lassi.jpg",
+                nutrition: ["Calories: 85 per 100ml", "Protein: 3g", "Carbohydrates: 12g", "Calcium: 110mg"]
+            },
+            17: {
+                id: 17,
+                name: "Paneer",
+                weight: "250g pack",
+                category: "dairy",
+                description: "Fresh and soft Indian cottage cheese, ideal for cooking.",
+                image: "images/Paneer.jpg",
+                nutrition: ["Calories: 265 per 100g", "Protein: 18g", "Fat: 20g", "Calcium: 208mg"]
+            },
+            18: {
+                id: 18,
+                name: "Ghee",
+                weight: "500g jar",
+                category: "dairy",
+                description: "Pure clarified butter with rich aroma and traditional taste.",
+                image: "images/Ghee.jpg",
+                nutrition: ["Calories: 900 per 100g", "Fat: 100g", "Vitamin A: 3068IU", "Vitamin E: 2.8mg"]
+            },
+            19: {
+                id: 19,
+                name: "Milk Powder",
+                weight: "1kg pack",
+                category: "dairy",
+                description: "High-quality instant milk powder, easy to store and use.",
+                image: "images/Milk Powder.jpg",
+                nutrition: ["Calories: 496 per 100g", "Protein: 26g", "Carbohydrates: 38g", "Calcium: 909mg"]
+            },
+            20: {
+                id: 20,
+                name: "Cake",
+                weight: "500g box",
+                category: "dairy",
+                description: "Delicious and soft cream cake, perfect for celebrations.",
+                image: "images/Cake.jpg",
+                nutrition: ["Calories: 350 per 100g", "Carbohydrates: 55g", "Fat: 12g", "Protein: 5g"]
+            },
+
+            21: {
+                id: 21,
+                name: "Basmati Rice",
+                weight: "1kg",
+                category: "staples",
+                description: "Long-grain aromatic rice, perfect for daily meals.",
+                image: "images/Basmati Rice.jpg",
+                nutrition: ["Calories: 365 per 100g", "Carbohydrates: 80g", "Protein: 7g", "Fiber: 1g"]
+            },
+            22: {
+                id: 22,
+                name: "Flattened Rice",
+                weight: "1kg",
+                category: "staples",
+                description: "Light and nutritious, ideal for quick snacks and breakfasts.",
+                image: "images/Flattened Rice.jpg",
+                nutrition: ["Calories: 370 per 100g", "Carbohydrates: 77g", "Protein: 7g", "Fiber: 2g"]
+            },
+            23: {
+                id: 23,
+                name: "Refined Flour",
+                weight: "1kg",
+                category: "staples",
+                description: "Fine and smooth refined flour for baking and cooking.",
+                image: "images/Refined Flour.jpg",
+                nutrition: ["Calories: 364 per 100g", "Carbohydrates: 76g", "Protein: 10g", "Fiber: 3g"]
+            },
+            24: {
+                id: 24,
+                name: "Wheat Flour",
+                weight: "1kg",
+                category: "staples",
+                description: "Whole wheat flour rich in fiber and essential nutrients.",
+                image: "images/Wheat Flour.jpg",
+                nutrition: ["Calories: 340 per 100g", "Carbohydrates: 72g", "Protein: 12g", "Fiber: 10g"]
+            },
+            25: {
+                id: 25,
+                name: "Besan",
+                weight: "1kg",
+                category: "staples",
+                description: "Gram flour used in snacks, sweets, and savory dishes.",
+                image: "images/Besan.jpg",
+                nutrition: ["Calories: 387 per 100g", "Carbohydrates: 58g", "Protein: 22g", "Fiber: 10g"]
+            },
+            26: {
+                id: 26,
+                name: "Semolina",
+                weight: "1kg",
+                category: "staples",
+                description: "Coarse wheat product used for upma and halwa.",
+                image: "images/Semolina.jpg",
+                nutrition: ["Calories: 360 per 100g", "Carbohydrates: 73g", "Protein: 12g", "Fiber: 3g"]
+            },
+            27: {
+                id: 27,
+                name: "Moong Dal",
+                weight: "1kg",
+                category: "staples",
+                description: "Protein-rich split yellow gram, easy to digest.",
+                image: "images/Moong Dal.jpg",
+                nutrition: ["Calories: 347 per 100g", "Carbohydrates: 63g", "Protein: 24g", "Fiber: 16g"]
+            },
+            28: {
+                id: 28,
+                name: "Chana Dal",
+                weight: "1kg",
+                category: "staples",
+                description: "Rich in protein and fiber, perfect for curries and soups.",
+                image: "images/Chana Dal.jpg",
+                nutrition: ["Calories: 364 per 100g", "Carbohydrates: 60g", "Protein: 20g", "Fiber: 12g"]
+            },
+            29: {
+                id: 29,
+                name: "Sunflower Oil",
+                weight: "1L",
+                category: "staples",
+                description: "Light and healthy oil for everyday cooking.",
+                image: "images/Sunflower Oil.jpg",
+                nutrition: ["Calories: 884 per 100g", "Fat: 100g", "Saturated Fat: 10g", "Vitamin E: High"]
+            },
+            30: {
+                id: 30,
+                name: "Mustard Oil",
+                weight: "1L",
+                category: "staples",
+                description: "Strong and flavorful oil used in Indian cooking.",
+                image: "images/Mustard Oil.jpg",
+
+                nutrition: ["Calories: 884 per 100g", "Fat: 100g", "Monounsaturated Fat: 60g", "Omega-3: Present"]
+            },
+            31: {
+                id: 31,
+                name: "Coconut Oil",
+                weight: "1L",
+                category: "staples",
+                description: "Pure and natural coconut oil for cooking and care.",
+                image: "images/Coconut Oil.jpg",
+                nutrition: ["Calories: 862 per 100g", "Fat: 100g", "Saturated Fat: 87g", "Cholesterol: 0mg"]
+            },
+            32: {
+                id: 32,
+                name: "White Sugar",
+                weight: "1kg",
+                category: "staples",
+                description: "Refined sugar ideal for desserts, tea, and sweets.",
+                image: "images/White Sugar.jpg",
+                nutrition: ["Calories: 387 per 100g", "Carbohydrates: 100g", "Protein: 0g", "Fat: 0g"]
+            },
+            33: {
+                id: 33,
+                name: "Masoor Dal",
+                weight: "1kg",
+                category: "staples",
+                description: "Red lentils rich in protein and easy to cook.",
+                image: "images/Masoor Dal.jpg",
+                nutrition: ["Calories: 352 per 100g", "Carbohydrates: 60g", "Protein: 25g", "Fiber: 11g"]
+            },
+            34: {
+                id: 34,
+                name: "Brown Sugar",
+                weight: "1kg",
+                category: "staples",
+                description: "Natural brown sugar with a rich molasses flavor.",
+                image: "images/Brown Sugar.jpg",
+                nutrition: ["Calories: 380 per 100g", "Carbohydrates: 98g", "Protein: 0g", "Fiber: 0g"]
+            },
+
+            35: {
+                id: 35,
+                name: "Turmeric Powder",
+                weight: "1kg",
+                category: "spices",
+                description: "Pure turmeric powder with rich color and natural aroma.",
+                image: "images/Turmeric Powder.jpg",
+                nutrition: ["Calories: 312 per 100g", "Carbohydrates: 67g", "Protein: 9g", "Fiber: 22g"]
+            },
+            36: {
+                id: 36,
+                name: "Red Chilli Powder",
+                weight: "1kg",
+                category: "spices",
+                description: "Spicy red chilli powder that adds heat and flavor to every dish.",
+                image: "images/Red Chilli Powder.jpg",
+                nutrition: ["Calories: 282 per 100g", "Carbohydrates: 50g", "Protein: 13g", "Fiber: 27g"]
+            },
+            37: {
+                id: 37,
+                name: "Cumin Powder",
+                weight: "1kg",
+                category: "spices",
+                description: "Ground cumin with a warm, earthy flavor perfect for curries.",
+                image: "images/Cumin Powder.jpg",
+                nutrition: ["Calories: 375 per 100g", "Carbohydrates: 44g", "Protein: 18g", "Fiber: 11g"]
+            },
+            38: {
+                id: 38,
+                name: "Garam Masala",
+                weight: "500g",
+                category: "spices",
+                description: "A traditional blend of aromatic spices to enhance Indian dishes.",
+                image: "images/Garam Masala.jpg",
+                nutrition: ["Calories: 320 per 100g", "Carbohydrates: 58g", "Protein: 12g", "Fiber: 15g"]
+            },
+            39: {
+                id: 39,
+                name: "Black Pepper",
+                weight: "500g",
+                category: "spices",
+                description: "Whole black peppercorns with strong flavor and aroma.",
+                image: "images/Black Pepper.jpg",
+                nutrition: ["Calories: 255 per 100g", "Carbohydrates: 64g", "Protein: 10g", "Fiber: 25g"]
+            },
+            40: {
+                id: 40,
+                name: "Coriander Powder",
+                weight: "1kg",
+                category: "spices",
+                description: "Freshly ground coriander seeds adding mild citrusy flavor.",
+                image: "images/Coriander Powder.jpg",
+                nutrition: ["Calories: 279 per 100g", "Carbohydrates: 55g", "Protein: 12g", "Fiber: 42g"]
+            },
+            41: {
+                id: 41,
+                name: "Cumin Seeds",
+                weight: "1kg",
+                category: "spices",
+                description: "Whole cumin seeds perfect for tempering and seasoning.",
+                image: "images/Cumin Seeds.jpg",
+                nutrition: ["Calories: 375 per 100g", "Carbohydrates: 44g", "Protein: 18g", "Fiber: 11g"]
+            },
+            42: {
+                id: 42,
+                name: "Cardamom",
+                weight: "250g",
+                category: "spices",
+                description: "Aromatic cardamom pods used for flavoring sweets and curries.",
+                image: "images/Cardamom.jpg",
+                nutrition: ["Calories: 311 per 100g", "Carbohydrates: 68g", "Protein: 11g", "Fiber: 28g"]
+            },
+            43: {
+                id: 43,
+                name: "Chicken Masala",
+                weight: "500g",
+                category: "spices",
+                description: "Richly spiced chicken masala for flavorful non-veg dishes.",
+                image: "images/Chicken Masala.jpg",
+                nutrition: ["Calories: 295 per 100g", "Carbohydrates: 45g", "Protein: 13g", "Fiber: 14g"]
+            },
+            44: {
+                id: 44,
+                name: "Chole Masala",
+                weight: "500g",
+                category: "spices",
+                description: "A flavorful mix of spices for authentic Punjabi chole.",
+                image: "images/Chole Masala.jpg",
+                nutrition: ["Calories: 310 per 100g", "Carbohydrates: 53g", "Protein: 11g", "Fiber: 17g"]
+            },
+            45: {
+                id: 45,
+                name: "Biryani Masala",
+                weight: "500g",
+                category: "spices",
+                description: "Premium biryani masala for rich and aromatic rice dishes.",
+                image: "images/Biryani Masala.jpg",
+                nutrition: ["Calories: 298 per 100g", "Carbohydrates: 51g", "Protein: 12g", "Fiber: 16g"]
+            },
+            46: {
+                id: 46,
+                name: "Fish Masala",
+                weight: "500g",
+                category: "spices",
+                description: "Specially blended masala to add tangy flavor to fish curries.",
+                image: "images/Fish Masala.jpg",
+                nutrition: ["Calories: 302 per 100g", "Carbohydrates: 48g", "Protein: 11g", "Fiber: 19g"]
+            },
+            47: {
+                id: 47,
+                name: "Black Salt",
+                weight: "1kg",
+                category: "spices",
+                description: "Mineral-rich black salt with a distinct tangy taste.",
+                image: "images/Black Salt.jpg",
+                nutrition: ["Sodium: 38g per 100g", "Minerals: High", "Calories: 0", "Carbohydrates: 0g"]
+            },
+            48: {
+                id: 48,
+                name: "Dry Ginger Powder",
+                weight: "500g",
+                category: "spices",
+                description: "Finely ground dry ginger for flavoring curries and sweets.",
+                image: "images/Dry Ginger Powder.jpg",
+                nutrition: ["Calories: 335 per 100g", "Carbohydrates: 71g", "Protein: 9g", "Fiber: 12g"]
+            },
+            49: {
+                id: 49,
+                name: "Kashmiri Red Chilli Powder",
+                weight: "500g",
+                category: "spices",
+                description: "Vibrant red chilli powder with mild heat and deep color.",
+                image: "images/Red Chilli Powder.jpg",
+                nutrition: ["Calories: 280 per 100g", "Carbohydrates: 50g", "Protein: 12g", "Fiber: 25g"]
+            },
+
+            50: {
+                id: 50,
+                name: "Cola",
+                weight: "500ml",
+                category: "beverages",
+                description: "Classic fizzy cola drink to refresh your mood.",
+                image: "https://images.unsplash.com/photo-1585238342022-2d7ff49eeb8d?auto=format&fit=crop&w=500&q=60",
+                nutrition: ["Calories: 42 per 100ml", "Carbohydrates: 11g", "Sugars: 10g"]
+            },
+            51: {
+                id: 51,
+                name: "Lemon Soda",
+                weight: "500ml",
+                category: "beverages",
+                description: "Refreshing lemon soda with a perfect tangy twist.",
+                image: "images/Lemon Soda.jpg",
+                nutrition: ["Calories: 38 per 100ml", "Carbohydrates: 9g", "Sugars: 8g"]
+            },
+            52: {
+                id: 52,
+                name: "Herbal Tea",
+                weight: "250g",
+                category: "beverages",
+                description: "Soothing herbal tea with natural antioxidants.",
+                image: "images/Herbal Tea.jpg",
+                nutrition: ["Calories: 1 per 100ml", "Caffeine: 0mg", "Antioxidants: High"]
+            },
+            53: {
+                id: 53,
+                name: "Coffee Powder",
+                weight: "200g",
+                category: "beverages",
+                description: "Rich and aromatic coffee powder for perfect mornings.",
+                image: "images/Coffee Powder.jpg",
+                nutrition: ["Calories: 2 per 100ml (prepared)", "Caffeine: 95mg", "Protein: 0.1g"]
+            },
+            54: {
+                id: 54,
+                name: "Lemon Juice",
+                weight: "1L",
+                category: "beverages",
+                description: "Fresh lemon juice full of vitamin C and tangy flavor.",
+                image: "images/Lemon Juice.jpg",
+                nutrition: ["Calories: 22 per 100ml", "Vitamin C: 38mg", "Carbohydrates: 6g"]
+            },
+            55: {
+                id: 55,
+                name: "Jaljeera Drink",
+                weight: "750ml",
+                category: "beverages",
+                description: "Tangy and spicy jaljeera drink perfect for digestion.",
+                image: "images/Jaljeera Drink.jpg",
+                nutrition: ["Calories: 25 per 100ml", "Carbohydrates: 6g", "Sodium: 200mg"]
+            },
+            56: {
+                id: 56,
+                name: "Mango Juice",
+                weight: "1L",
+                category: "beverages",
+                description: "Sweet and refreshing mango juice made from ripe mangoes.",
+                image: "images/Mango Juice.jpg",
+                nutrition: ["Calories: 45 per 100ml", "Carbohydrates: 11g", "Sugars: 10g"]
+            },
+            57: {
+                id: 57,
+                name: "Apple Juice",
+                weight: "1L",
+                category: "beverages",
+                description: "Freshly pressed apple juice packed with nutrients.",
+                image: "images/Apple Juice.jpg",
+                nutrition: ["Calories: 46 per 100ml", "Carbohydrates: 12g", "Sugars: 11g"]
+            },
+
+            58: {
+                id: 58,
+                name: "Coca-Cola",
+                weight: "500ml",
+                category: "snacks",
+                description: "Classic carbonated drink with a refreshing taste.",
+                image: "images/Coca-Cola.jpg",
+                nutrition: ["Calories: 42 per 100ml", "Sugar: 10.6g", "Carbohydrates: 10.6g", "Protein: 0g"]
+            },
+            59: {
+                id: 59,
+                name: "Pepsi",
+                weight: "500ml",
+                category: "snacks",
+                description: "Refreshing cola beverage with a bold flavor.",
+                image: "images/Pepsi.jpg",
+                nutrition: ["Calories: 43 per 100ml", "Sugar: 10.9g", "Carbohydrates: 10.9g", "Protein: 0g"]
+            },
+            60: {
+                id: 60,
+                name: "Sprite",
+                weight: "500ml",
+                category: "snacks",
+                description: "Lemon-lime soda for instant freshness and fizz.",
+                image: "images/Sprite.jpg",
+                nutrition: ["Calories: 39 per 100ml", "Sugar: 9.6g", "Carbohydrates: 9.6g", "Protein: 0g"]
+            },
+            61: {
+                id: 61,
+                name: "Thums Up",
+                weight: "500ml",
+                category: "snacks",
+                description: "Strong cola drink with a bold, thunderous taste.",
+                image: "images/Thums Up.jpg",
+                nutrition: ["Calories: 45 per 100ml", "Sugar: 11g", "Carbohydrates: 11g", "Protein: 0g"]
+            },
+            62: {
+                id: 62,
+                name: "7UP",
+                weight: "500ml",
+                category: "snacks",
+                description: "Crisp, clean, and refreshing lemon-lime drink.",
+                image: "images/7up.jpg",
+                nutrition: ["Calories: 38 per 100ml", "Sugar: 9.3g", "Carbohydrates: 9.3g", "Protein: 0g"]
+            },
+            63: {
+                id: 63,
+                name: "Redbull",
+                weight: "250ml",
+                category: "snacks",
+                description: "Energy drink to boost performance and alertness.",
+                image: "images/Redbull.jpg",
+
+                nutrition: ["Calories: 45 per 100ml", "Sugar: 11g", "Caffeine: 32mg", "Protein: 0g"]
+            },
+            64: {
+                id: 64,
+                name: "Horlicks",
+                weight: "500g",
+                category: "snacks",
+                description: "Nutritious malt drink for strength and energy.",
+                image: "images/Horlicks.jpg",
+                nutrition: ["Calories: 380 per 100g", "Protein: 12g", "Carbohydrates: 70g", "Fat: 3.8g"]
+            },
+            65: {
+                id: 65,
+                name: "Amul Cool",
+                weight: "200ml",
+                category: "snacks",
+                description: "Chilled flavored milk drink from Amul for refreshment.",
+                image: "images/Amul Cool.jpg",
+                nutrition: ["Calories: 80 per 100ml", "Protein: 3g", "Fat: 3.2g", "Carbohydrates: 9g"]
+            },
+            66: {
+                id: 66,
+                name: "Mineral Water",
+                weight: "1L",
+                category: "snacks",
+                description: "Pure and clean mineral water for hydration and freshness.",
+                image: "images/Mineral Water.jpg",
+                nutrition: ["Calories: 0", "Sodium: 2mg", "Calcium: 4mg", "Magnesium: 1mg"]
+            },
+
+            67: {
+                id: 67,
+                name: "Lip Balm",
+                weight: "15g",
+                category: "personal",
+                description: "Moisturizing lip balm to keep your lips soft and smooth.",
+                image: "images/Lip Balm.jpg",
+                nutrition: ["Nourishment: Vitamin E", "Hydration: Long-lasting", "SPF: 15"]
+            },
+            68: {
+                id: 68,
+                name: "Sunscreen",
+                weight: "100ml",
+                category: "personal",
+                description: "Protects your skin from harmful UV rays.",
+                image: "https://images.unsplash.com/photo-1587019154795-363ec2b3a01a?auto=format&fit=crop&w=500&q=60",
+                nutrition: ["SPF: 50", "Protection: UVA & UVB", "Water Resistant: Yes"]
+            },
+            69: {
+                id: 69,
+                name: "Hair Oil",
+                weight: "200ml",
+                category: "personal",
+                description: "Nourishing oil for strong and shiny hair.",
+                image: "https://images.unsplash.com/photo-1617692854504-94c6464f4caa?auto=format&fit=crop&w=500&q=60",
+                nutrition: ["Enriched with: Coconut & Almond", "Hair Type: All", "Paraben Free: Yes"]
+            },
+            70: {
+                id: 70,
+                name: "Shampoo",
+                weight: "250ml",
+                category: "personal",
+                description: "Cleanses and strengthens your hair with every wash.",
+                image: "images/Shampoo.jpg",
+                nutrition: ["Contains: Keratin", "Sulphate Free: Yes", "Hair Type: Normal to Dry"]
+            },
+            71: {
+                id: 71,
+                name: "Conditioner",
+                weight: "250ml",
+                category: "personal",
+                description: "Smooth conditioner for soft, manageable hair.",
+                image: "https://images.unsplash.com/photo-1591076482161-3d1b3b8d8b04?auto=format&fit=crop&w=500&q=60",
+                nutrition: ["Moisturizer: Shea Butter", "Hair Type: All", "Free From: Parabens"]
+            },
+            72: {
+                id: 72,
+                name: "Hair Color",
+                weight: "100ml",
+                category: "personal",
+                description: "Rich color formula for long-lasting shine.",
+                image: "https://images.unsplash.com/photo-1609175992430-5f8f24f6534d?auto=format&fit=crop&w=500&q=60",
+                nutrition: ["Color Type: Natural Black", "Ammonia Free: Yes", "Duration: Up to 6 weeks"]
+            },
+            73: {
+                id: 73,
+                name: "Toothpaste",
+                weight: "150g",
+                category: "personal",
+                description: "Fluoride toothpaste for fresh breath and strong teeth.",
+                image: "images/Toothpaste.jpg",
+                nutrition: ["Fluoride Content: 1000ppm", "Freshness: Long-lasting", "Whitening: Gentle"]
+            },
+            74: {
+                id: 74,
+                name: "Tongue Cleaner",
+                weight: "1pc",
+                category: "personal",
+                description: "Stainless steel cleaner for better oral hygiene.",
+                image: "images/Tongue Cleaner.jpg",
+                nutrition: ["Material: Stainless Steel", "Reusable: Yes", "Hygiene: Dentist Recommended"]
+            },
+            75: {
+                id: 75,
+                name: "Body Lotion",
+                weight: "200ml",
+                category: "personal",
+                description: "Hydrating lotion for smooth and glowing skin.",
+                image: "images/Body Lotion.jpg",
+                nutrition: ["Moisturizer: Shea Butter", "Skin Type: Dry to Normal", "Fragrance: Mild"]
+            },
+            76: {
+                id: 76,
+                name: "Body Wash",
+                weight: "250ml",
+                category: "personal",
+                description: "Refreshing body wash with a long-lasting fragrance.",
+                image: "images/Body Wash.jpg",
+                nutrition: ["pH Balanced: Yes", "Cleansing Type: Mild", "Suitable For: Daily Use"]
+            },
+            77: {
+                id: 77,
+                name: "Bath Sponge",
+                weight: "1pc",
+                category: "personal",
+                description: "Soft bath sponge for gentle exfoliation and cleansing.",
+                image: "images/Bath Sponge.jpg",
+                nutrition: ["Material: Soft Mesh", "Reusable: Yes", "Purpose: Exfoliation"]
+            },
+            78: {
+                id: 78,
+                name: "Makeup Remover",
+                weight: "100ml",
+                category: "personal",
+                description: "Gentle makeup remover for clean and refreshed skin.",
+                image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=500&q=60",
+                nutrition: ["Type: Oil-Free", "Suitable For: All Skin Types", "Removes Waterproof Makeup: Yes"]
+            },
+            79: {
+                id: 79,
+                name: "Aloe Vera Gel",
+                weight: "150ml",
+                category: "personal",
+                description: "Pure aloe vera gel for soothing and moisturizing skin.",
+                image: "images/Aloe Vera Gel.jpg",
+                nutrition: ["Ingredient: 100% Aloe Vera", "Cooling Effect: Yes", "Usage: Face & Body"]
+            },
+
+            80: {
+                id: 80,
+                name: "Floor Cleaner",
+                weight: "1L",
+                category: "home",
+                description: "Effective floor cleaner that removes tough stains and leaves a fresh fragrance.",
+                image: "images/Floor Cleaner.jpg"
+            },
+            81: {
+                id: 81,
+                name: "Toilet Cleaner",
+                weight: "500ml",
+                category: "home",
+                description: "Powerful toilet cleaner for a germ-free and sparkling clean toilet bowl.",
+                image: "images/Toilet Cleaner.jpg"
+            },
+            82: {
+                id: 82,
+                name: "Glass Cleaner",
+                weight: "500ml",
+                category: "home",
+                description: "Streak-free glass cleaner that provides crystal-clear shine on all glass surfaces.",
+                image: "images/Glass Cleaner.jpg"
+            },
+            83: {
+                id: 83,
+                name: "Kitchen Cleaner",
+                weight: "500ml",
+                category: "home",
+                description: "Removes oil, grease, and stains to keep your kitchen surfaces sparkling clean.",
+                image: "images/Kitchen Cleaner.jpg"
+            },
+            84: {
+                id: 84,
+                name: "Air Freshener",
+                weight: "300ml",
+                category: "home",
+                description: "Refreshing air freshener to keep your home smelling pleasant all day long.",
+                image: "https://images.unsplash.com/photo-1620912189861-fb1b6a06b6d7?auto=format&fit=crop&w=500&q=60"
+            },
+            85: {
+                id: 85,
+                name: "Detergent Powder",
+                weight: "1kg",
+                category: "home",
+                description: "Powerful detergent powder for bright, fresh-smelling laundry every wash.",
+                image: "https://images.unsplash.com/photo-1581579186989-4496c3c2c1f5?auto=format&fit=crop&w=500&q=60"
+            },
+            86: {
+                id: 86,
+                name: "Fabric Softener",
+                weight: "500ml",
+                category: "home",
+                description: "Keeps clothes soft, fresh, and static-free with a long-lasting fragrance.",
+                image: "images/Fabric Softener.jpg"
+            },
+            87: {
+                id: 87,
+                name: "Mop & Bucket Set",
+                weight: "1 Set",
+                category: "home",
+                description: "Durable mop and bucket set for easy and efficient home cleaning.",
+                image: "images/Mop & Bucket Set.jpg"
+            },
+            88: {
+                id: 88,
+                name: "Scrub Sponge",
+                weight: "Pack of 3",
+                category: "home",
+                description: "Multi-purpose scrub sponges ideal for cleaning kitchen and household surfaces.",
+                image: "images/Scrub Sponge.jpg"
+            },
+            89: {
+                id: 89,
+                name: "Garbage Bag Roll",
+                weight: "30 Bags",
+                category: "home",
+                description: "Strong and leak-proof garbage bags for easy and hygienic waste disposal.",
+                image: "images/Garbage Bag Roll.jpg"
+            },
+            90: {
+                id: 90,
+                name: "Room Spray",
+                weight: "250ml",
+                category: "home",
+                description: "Instantly refreshes any room with a long-lasting pleasant fragrance.",
+                image: "https://images.unsplash.com/photo-1621091015848-7e6a2ce1cb1d?auto=format&fit=crop&w=500&q=60"
+            },
+            91: {
+                id: 91,
+                name: "Bathroom Brush",
+                weight: "1 Unit",
+                category: "home",
+                description: "Ergonomic brush designed for effective cleaning of bathroom tiles and corners.",
+                image: "https://images.unsplash.com/photo-1614338827299-7b7d3245dfe0?auto=format&fit=crop&w=500&q=60"
+            },
+            92: {
+                id: 92,
+                name: "Microfiber Cloth",
+                weight: "Pack of 4",
+                category: "home",
+                description: "Soft microfiber cloths that attract dust and clean surfaces without scratches.",
+                image: "https://images.unsplash.com/photo-1581574203822-d8cbf0d6d1e8?auto=format&fit=crop&w=500&q=60"
+            },
+
+            93: {
+                id: 93,
+                name: "Baby Lotion",
+                weight: "200ml",
+                category: "kids",
+                description: "Gentle baby lotion that keeps your baby's skin soft and moisturized.",
+                image: "https://images.unsplash.com/photo-1607082349566-1873423755d2?auto=format&fit=crop&w=500&q=60"
+            },
+            94: {
+                id: 94,
+                name: "Baby Shampoo",
+                weight: "200ml",
+                category: "kids",
+                description: "Tear-free baby shampoo for soft, shiny, and clean baby hair.",
+                image: "images/Baby Shampoo.jpg"
+            },
+            95: {
+                id: 95,
+                name: "Baby Soap",
+                weight: "100g",
+                category: "kids",
+                description: "Mild and moisturizing baby soap for gentle daily cleansing.",
+                image: "images/Baby Soap.jpg"
+            },
+            96: {
+                id: 96,
+                name: "Baby Powder",
+                weight: "200g",
+                category: "kids",
+                description: "Soft baby powder to keep your baby’s skin fresh and dry all day.",
+                image: "images/Baby Powder.jpg"
+            },
+            97: {
+                id: 97,
+                name: "Diapers",
+                weight: "Pack of 20",
+                category: "kids",
+                description: "Soft and absorbent diapers for ultimate comfort and dryness.",
+                image: "https://images.unsplash.com/photo-1607773700055-76c54f7e2b3e?auto=format&fit=crop&w=500&q=60"
+            },
+            98: {
+                id: 98,
+                name: "Baby Wipes",
+                weight: "Pack of 80",
+                category: "kids",
+                description: "Gentle, alcohol-free wipes for baby’s delicate skin.",
+                image: "images/Baby Wipes.jpg"
+            },
+            99: {
+                id: 99,
+                name: "Feeding Bottle",
+                weight: "250ml",
+                category: "kids",
+                description: "Safe, BPA-free feeding bottle with anti-colic nipple.",
+                image: "images/Feeding Bottle.jpg"
+            },
+            100: {
+                id: 100,
+                name: "Baby Food",
+                weight: "200g",
+                category: "kids",
+                description: "Nutritious baby food rich in vitamins and essential minerals.",
+                image: "images/Baby Food.jpg"
+            },
+
+
+
+
+
+
+
+
+        };
+
+
+        // DOM Elements
+        const productsGrid = document.getElementById('productsGrid');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const sortSelect = document.getElementById('sortSelect');
+        const cartIcon = document.getElementById('cartIcon');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.querySelector('.cart-count');
+        const cartTotal = document.getElementById('cartTotal');
+        const productModal = document.getElementById('productModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalBody = document.getElementById('modalBody');
+        const loadMoreBtn = document.getElementById('loadMore');
+        const backToTop = document.getElementById('backToTop');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.getElementById('searchBtn');
+        const productCount = document.getElementById('productCount');
+        const mobileSearchOverlay = document.getElementById('mobileSearchOverlay');
+        const closeMobileSearch = document.getElementById('closeMobileSearch');
+        const mobileSearchInput = document.querySelector('.mobile-search-input');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const checkoutModal = document.getElementById('checkoutModal');
+        const cancelCheckout = document.getElementById('cancelCheckout');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const checkoutSummary = document.getElementById('checkoutSummary');
+        const checkoutTotal = document.getElementById('checkoutTotal');
+        const confirmCheckout = document.getElementById('confirmCheckout');
+
+        // State variables
+        let currentCategory = 'all';
+        let currentSort = 'default';
+        let displayedProducts = 12;
+        let cart = [];
+        let wishlist = [];
+
+        // Initialize the page
+        function init() {
+            setupEventListeners();
+            updateCartUI();
+            updateProductCount();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Category filter buttons
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = btn.dataset.category;
+                    filterProducts();
+                });
+            });
+
+            // Sort select
+            sortSelect.addEventListener('change', () => {
+                currentSort = sortSelect.value;
+                sortProducts();
+            });
+
+            // Cart icon
+            cartIcon.addEventListener('click', () => {
+                cartSidebar.classList.add('active');
+            });
+
+            // Close cart
+            closeCart.addEventListener('click', () => {
+                cartSidebar.classList.remove('active');
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', () => {
+                productModal.classList.remove('active');
+            });
+
+            // Load more button
+            loadMoreBtn.addEventListener('click', () => {
+                displayedProducts += 6;
+                filterProducts();
+            });
+
+            // Back to top button
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Scroll event for back to top button
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+
+            // Hamburger menu - From index.html
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                filterProductsBySearch(searchTerm);
+            });
+
+            // Mobile search functionality
+            searchBtn.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    mobileSearchOverlay.classList.add('active');
+                    mobileSearchInput.focus();
+                }
+            });
+
+            // Close mobile search
+            closeMobileSearch.addEventListener('click', () => {
+                mobileSearchOverlay.classList.remove('active');
+            });
+
+            // Mobile search input
+            mobileSearchInput.addEventListener('input', () => {
+                const searchTerm = mobileSearchInput.value.toLowerCase();
+                filterProductsBySearch(searchTerm);
+            });
+
+            // Close cart when clicking outside - Fixed to prevent closing during operations
+            document.addEventListener('click', (e) => {
+                if (cartSidebar.classList.contains('active') &&
+                    !cartSidebar.contains(e.target) &&
+                    !cartIcon.contains(e.target) &&
+                    !e.target.classList.contains('quantity-btn') &&
+                    !e.target.classList.contains('remove-item') &&
+                    !e.target.closest('.quantity-btn') &&
+                    !e.target.closest('.remove-item')) {
+                    cartSidebar.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu when clicking on a link - From index.html
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+
+            // Close mobile search when clicking outside
+            document.addEventListener('click', (e) => {
+                if (mobileSearchOverlay.classList.contains('active') &&
+                    !mobileSearchOverlay.contains(e.target) &&
+                    !searchBtn.contains(e.target)) {
+                    mobileSearchOverlay.classList.remove('active');
+                }
+            });
+
+            // Add to cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const productId = e.target.dataset.id;
+                    addToCart(products[productId]);
+                });
+            });
+
+            // Wishlist buttons
+            document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const productId = e.currentTarget.dataset.id;
+                    toggleWishlist(products[productId], e.currentTarget);
+                });
+            });
+
+            // Product image and name click for modal
+            document.querySelectorAll('.product-image, .product-name').forEach(element => {
+                element.addEventListener('click', (e) => {
+                    const productCard = e.target.closest('.product-card');
+                    const productId = productCard.dataset.id;
+                    openProductModal(products[productId]);
+                });
+            });
+
+            // Checkout button
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    showNotification('Your cart is empty!');
+                    return;
+                }
+                openCheckoutModal();
+            });
+
+            // Cancel checkout
+            cancelCheckout.addEventListener('click', () => {
+                checkoutModal.classList.remove('active');
+            });
+
+            // WhatsApp checkout
+            confirmCheckout.addEventListener('click', () => {
+                processCheckout();
+            });
+        }
+
+        // Filter products by category
+        function filterProducts() {
+            const productCards = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+
+            productCards.forEach(card => {
+                const category = card.dataset.category;
+
+                if (currentCategory === 'all' || category === currentCategory) {
+                    card.style.display = 'block';
+                    visibleCount++;
+
+                    // Hide products beyond the displayed count
+                    if (visibleCount > displayedProducts) {
+                        card.style.display = 'none';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update product count
+            productCount.textContent = Math.min(visibleCount, displayedProducts);
+
+            // Show/hide load more button
+            if (visibleCount <= displayedProducts) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'block';
+            }
+
+            // Sort products after filtering
+            sortProducts();
+        }
+
+        // Sort products
+        function sortProducts() {
+            const productCards = Array.from(document.querySelectorAll('.product-card'));
+            const container = document.getElementById('productsGrid');
+
+            productCards.sort((a, b) => {
+                const aName = a.querySelector('.product-name').textContent;
+                const bName = b.querySelector('.product-name').textContent;
+                const aId = parseInt(a.dataset.id);
+                const bId = parseInt(b.dataset.id);
+
+                switch (currentSort) {
+                    case 'name':
+                        return aName.localeCompare(bName);
+                    case 'newest':
+                        return bId - aId;
+                    default:
+                        return 0;
+                }
+            });
+
+            // Re-append sorted products
+            productCards.forEach(card => {
+                container.appendChild(card);
+            });
+        }
+
+        // Filter products by search term
+        function filterProductsBySearch(searchTerm) {
+            const productCards = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+
+            productCards.forEach(card => {
+                const name = card.querySelector('.product-name').textContent.toLowerCase();
+                const description = card.querySelector('.product-description').textContent.toLowerCase();
+                const category = card.dataset.category;
+
+                const matchesSearch = !searchTerm || name.includes(searchTerm) || description.includes(searchTerm);
+                const matchesCategory = currentCategory === 'all' || category === currentCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'block';
+                    visibleCount++;
+
+                    // Hide products beyond the displayed count
+                    if (visibleCount > displayedProducts) {
+                        card.style.display = 'none';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update product count
+            productCount.textContent = Math.min(visibleCount, displayedProducts);
+
+            // Hide load more button when searching
+            loadMoreBtn.style.display = 'none';
+        }
+
+        // Update product count
+        function updateProductCount() {
+            const visibleProducts = document.querySelectorAll('.product-card[style="display: block"]').length;
+            productCount.textContent = Math.min(visibleProducts, displayedProducts);
+        }
+
+        // Add product to cart
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+
+            // Show confirmation
+            showNotification(`${product.name} added to cart!`);
+        }
+
+        // Remove product from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        // Update cart quantity
+        function updateCartQuantity(productId, newQuantity) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                if (newQuantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    item.quantity = newQuantity;
+                }
+            }
+            updateCartUI();
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            // Update cart count
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Update cart items
+            cartItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <div class="cart-item-weight">${item.weight}</div>
+                            <div class="cart-item-controls">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                    <span class="quantity">${item.quantity}</span>
+                                    <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                                </div>
+                                <button class="remove-item" data-id="${item.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    cartItems.appendChild(cartItem);
+
+                    // Add event listeners to quantity buttons
+                    const minusBtn = cartItem.querySelector('.minus');
+                    const plusBtn = cartItem.querySelector('.plus');
+                    const removeBtn = cartItem.querySelector('.remove-item');
+
+                    minusBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent event bubbling
+                        updateCartQuantity(item.id, item.quantity - 1);
+                    });
+
+                    plusBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent event bubbling
+                        updateCartQuantity(item.id, item.quantity + 1);
+                    });
+
+                    removeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent event bubbling
+                        removeFromCart(item.id);
+                    });
+                });
+            }
+
+            // Update cart total
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartTotal.textContent = total;
+        }
+
+        // Toggle product in wishlist
+        function toggleWishlist(product, button) {
+            const index = wishlist.findIndex(item => item.id === product.id);
+
+            if (index === -1) {
+                wishlist.push(product);
+                button.classList.add('active');
+                button.innerHTML = '<i class="fas fa-heart"></i>';
+                showNotification(`${product.name} added to wishlist!`);
+            } else {
+                wishlist.splice(index, 1);
+                button.classList.remove('active');
+                button.innerHTML = '<i class="far fa-heart"></i>';
+                showNotification(`${product.name} removed from wishlist!`);
+            }
+        }
+
+        // Open product modal
+        function openProductModal(product) {
+            modalBody.innerHTML = `
+                <div class="modal-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="modal-details">
+                    <h2 class="modal-title">${product.name}</h2>
+                    <p class="modal-description">${product.description}</p>
+                    <div class="modal-nutrition">
+                        <h3 class="nutrition-title"></h3>
+                        
+                    </div>
+                    <div class="modal-actions">
+                        <button class="modal-add-to-cart" data-id="${product.id}">Add to Cart</button>
+                        <button class="modal-wishlist" data-id="${product.id}">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Add event listeners to modal buttons
+            const modalAddToCart = modalBody.querySelector('.modal-add-to-cart');
+            const modalWishlist = modalBody.querySelector('.modal-wishlist');
+
+            modalAddToCart.addEventListener('click', () => {
+                addToCart(product);
+                productModal.classList.remove('active');
+            });
+
+            modalWishlist.addEventListener('click', () => {
+                toggleWishlist(product, modalWishlist);
+            });
+
+            // Check if product is in wishlist
+            if (wishlist.find(item => item.id === product.id)) {
+                modalWishlist.classList.add('active');
+                modalWishlist.innerHTML = '<i class="fas fa-heart"></i>';
+            }
+
+            productModal.classList.add('active');
+        }
+
+        // Open checkout modal
+        function openCheckoutModal() {
+            // Update checkout summary
+            checkoutSummary.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span>${item.name} (${item.weight}) x${item.quantity}</span>
+                `;
+                checkoutSummary.appendChild(listItem);
+                total += item.quantity;
+            });
+
+            checkoutTotal.textContent = total;
+
+            // Show checkout modal
+            checkoutModal.classList.add('active');
+        }
+
+        // Process checkout via WhatsApp
+        function processCheckout() {
+            const customerName = document.getElementById('customerName').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            const customerAddress = document.getElementById('customerAddress').value;
+
+            // Validate form
+            if (!customerName || !customerPhone || !customerAddress) {
+                showNotification('Please fill in all required fields!');
+                return;
+            }
+
+            // Prepare order details
+            let orderDetails = `New Order from ${customerName}%0A`;
+            orderDetails += `Phone: ${customerPhone}%0A`;
+            orderDetails += `Delivery Address: ${customerAddress}%0A%0A`;
+            orderDetails += `Order Details:%0A`;
+
+            cart.forEach(item => {
+                orderDetails += `${item.name} (${item.weight}) x${item.quantity}%0A`;
+            });
+
+            orderDetails += `%0ATotal Items: ${cart.reduce((sum, item) => sum + item.quantity, 0)}`;
+
+            // WhatsApp number
+            const whatsappNumber = "+919692054162";
+
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${orderDetails}`;
+
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
+
+            // Show confirmation
+            showNotification('Opening WhatsApp with your order details...');
+
+            // Close modals and reset cart
+            checkoutModal.classList.remove('active');
+            cartSidebar.classList.remove('active');
+            cart = [];
+            updateCartUI();
+
+            // Reset form
+            checkoutForm.reset();
+        }
+
+        // Show notification
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            // Animate out and remove
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize the page
+        init();
+    </script>
+</body>
+
+</html>
